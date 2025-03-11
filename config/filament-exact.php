@@ -24,15 +24,15 @@ return [
     ],
 
     'exact' => [
-        'redirect_uri' => "",
-        'callback_path' => "exact/callback",
-        'client_id' => "",
-        'client_secret' => "",
-        'division' => "",
-        'webhook_secret' => ""
+        'redirect_uri' => '',
+        'callback_path' => 'exact/callback',
+        'client_id' => '',
+        'client_secret' => '',
+        'division' => '',
+        'webhook_secret' => '',
     ],
 
     'navigation' => [
         'group' => null,
-    ]
+    ],
 ];

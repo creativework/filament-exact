@@ -3,9 +3,7 @@
 namespace creativework\FilamentExact\Models;
 
 use creativework\FilamentExact\Enums\QueueStatusEnum;
-use Database\Factories\ExactQueueFactory;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -70,7 +68,7 @@ class ExactQueue extends Model
 
     public function dispatch()
     {
-        if (!class_exists($this->job)) {
+        if (! class_exists($this->job)) {
             Log::error('Job class does not exist', ['job' => $this->job]);
             $this->update([
                 'status' => QueueStatusEnum::FAILED,

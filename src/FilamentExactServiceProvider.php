@@ -4,16 +4,10 @@ namespace creativework\FilamentExact;
 
 use creativework\FilamentExact\Commands\ProcessExactQueue;
 use creativework\FilamentExact\Commands\PruneExactQueue;
-use creativework\FilamentExact\Controllers\ExactController;
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Route;
-use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -136,7 +130,7 @@ class FilamentExactServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return collect(app(Filesystem::class)->files(__DIR__.'/../database/migrations'))
+        return collect(app(Filesystem::class)->files(__DIR__ . '/../database/migrations'))
             ->map(fn (SplFileInfo $file) => str_replace('.php.stub', '', $file->getBasename()))
             ->toArray();
     }

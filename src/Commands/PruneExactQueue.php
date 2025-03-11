@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 class PruneExactQueue extends Command
 {
-
     public $signature = 'exact:prune';
 
     public $description = 'Prune old exact queue records';
@@ -16,8 +15,9 @@ class PruneExactQueue extends Command
         $class = config('filament-exact.model');
         $class = new $class;
 
-        if (!config('filament-exact.database.pruning.enabled', false)) {
+        if (! config('filament-exact.database.pruning.enabled', false)) {
             $this->info('Pruning is disabled for exact queue records');
+
             return;
         }
 
@@ -26,5 +26,4 @@ class PruneExactQueue extends Command
 
         $this->info('Old exact queue records pruned successfully');
     }
-
 }

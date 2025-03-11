@@ -7,12 +7,11 @@ use Picqer\Financials\Exact\Connection;
 
 class ExactService
 {
-
     protected Connection $connection;
 
     public function __construct()
     {
-        $this->connection = new Connection();
+        $this->connection = new Connection;
         $this->connection->setRedirectUrl(config('filament-exact.exact.redirect_uri'));
         $this->connection->setExactClientId(config('filament-exact.exact.client_id'));
         $this->connection->setExactClientSecret(config('filament-exact.exact.client_secret'));
@@ -35,11 +34,13 @@ class ExactService
         }
     }
 
-    public function getAuthUrl() {
+    public function getAuthUrl()
+    {
         return $this->connection->getAuthUrl();
     }
 
-    public function authorize($code) {
+    public function authorize($code)
+    {
         $this->setValue('authorization_code', $code);
 
         try {
@@ -50,7 +51,8 @@ class ExactService
         }
     }
 
-    public function connect() {
+    public function connect()
+    {
         try {
             $this->connection->connect();
         } catch (\Exception $e) {
@@ -63,12 +65,15 @@ class ExactService
         $this->setValue('expires_in', $this->connection->getTokenExpires());
     }
 
-    private function getValue(string $key) {
+    private function getValue(string $key)
+    {
         $token = ExactToken::first();
+
         return $token ? $token[$key] : null;
     }
 
-    private function setValue(string $key, $value) {
+    private function setValue(string $key, $value)
+    {
         $token = ExactToken::first();
         if ($token) {
             $token[$key] = $value;
@@ -78,11 +83,13 @@ class ExactService
         }
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->connection;
     }
 
-    public function setDivision($division) {
+    public function setDivision($division)
+    {
         $this->connection->setDivision($division);
     }
 }

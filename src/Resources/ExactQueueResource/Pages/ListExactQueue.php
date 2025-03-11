@@ -2,8 +2,6 @@
 
 namespace creativework\FilamentExact\Resources\ExactQueueResource\Pages;
 
-use creativework\FilamentExact\Enums\QueueStatusEnum;
-use creativework\FilamentExact\Models\ExactQueue;
 use creativework\FilamentExact\Models\ExactToken;
 use creativework\FilamentExact\Resources\ExactQueueResource;
 use creativework\FilamentExact\Services\ExactService;
@@ -15,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ListExactQueue extends ListRecords
 {
-
     public static function getResource(): string
     {
         return config('filament-exact.resource', ExactQueueResource::class);
@@ -72,10 +69,12 @@ class ListExactQueue extends ListRecords
                 ->icon('heroicon-o-key')
                 ->color(function ($record) {
                     $token = ExactToken::first();
+
                     return $token && $token['access_token'] ? 'danger' : 'success';
                 })
                 ->label(function ($record) {
                     $token = ExactToken::first();
+
                     return $token && $token['access_token'] ? __('Disconnect') : __('Authorize');
                 })
                 ->action(function ($record) {
@@ -88,12 +87,13 @@ class ListExactQueue extends ListRecords
                             ->body(__('You have been disconnected from Exact'))
                             ->success()
                             ->send();
+
                         return;
                     }
 
-                    $service = new ExactService();
+                    $service = new ExactService;
                     redirect()->away($service->getAuthUrl());
-                })
+                }),
         ];
     }
 }
