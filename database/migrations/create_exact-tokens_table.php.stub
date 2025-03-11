@@ -14,7 +14,7 @@ return new class extends Migration
             $table->longText('authorization_code')->nullable();
             $table->longText('access_token')->nullable();
             $table->longText('refresh_token')->nullable();
-            $table->int('expires_in')->nullable();
+            $table->integer('expires_in')->nullable();
             $table->timestamps();
         });
     }
