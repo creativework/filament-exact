@@ -1,0 +1,64 @@
+{
+    "name": "creativework/filament-exact",
+    "description": "ExactOnline Panel for FilamentPHP",
+    "keywords": [
+        "creativework",
+        "laravel",
+        "filament-exact"
+    ],
+    "homepage": "https://github.com/creativework/filament-exact",
+    "support": {
+        "issues": "https://github.com/creativework/filament-exact/issues",
+        "source": "https://github.com/creativework/filament-exact"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jessedev1",
+            "email": "jesse@creativework.nl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "filament/filament": "^3.0",
+        "picqer/exact-php-client": "^4.5",
+        "spatie/laravel-package-tools": "^1.15.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^7.9",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^2.1",
+        "pestphp/pest-plugin-arch": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "spatie/laravel-ray": "^1.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "creativework\\FilamentExact\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "creativework\\FilamentExact\\FilamentExactServiceProvider"
+            ],
+            "aliases": {
+                "FilamentMails": "creativework\\FilamentExact\\Facades\\FilamentExact"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

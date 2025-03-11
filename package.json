@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "npm-run-all --parallel dev:*",
+        "build": "npm-run-all build:*"
+    },
+    "devDependencies": {
+        "esbuild": "^0.19.2"
+    }
+}

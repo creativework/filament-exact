@@ -1,0 +1,22 @@
+{
+    "Exact": "Exact",
+    "Jobs": "Taken",
+    "Job": "Taak",
+    "Queue": "Wachtrij",
+    "Pending": "In afwachting",
+    "Processing": "Wordt verwerkt",
+    "Completed": "Voltooid",
+    "Failed": "Mislukt",
+    "Cancelled": "Geannuleerd",
+    "Status": "Status",
+    "Number": "Nummer",
+    "Method": "Methode",
+    "Parameters": "Parameters",
+    "Priority": "Prioriteit",
+    "Increase Priority": "Prioriteit verhogen",
+    "Are you sure you want to increase the priority of this job?": "Weet je zeker dat je de prioriteit van deze taak wilt verhogen?",
+    "Priority increased": "Prioriteit verhoogd",
+    "The task will be dispatched soon.": "De taak zal spoedig op worden gepakt.",
+    "Authorize": "Autoriseren",
+    "Disconnect": "Verbreken"
+}

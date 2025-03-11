@@ -1,0 +1,23 @@
+{
+    "Exact": "Exact",
+    "Jobs": "Jobs",
+    "Job": "Job",
+    "All": "Alle",
+    "Queue": "Queue",
+    "Pending": "Pending",
+    "Processing": "Processing",
+    "Completed": "Completed",
+    "Failed": "Failed",
+    "Cancelled": "Cancelled",
+    "Status": "Status",
+    "Number": "Number",
+    "Method": "Method",
+    "Parameters": "Parameters",
+    "Priority": "Priority",
+    "Increase Priority": "Increase Priority",
+    "Are you sure you want to increase the priority of this job?": "Are you sure you want to prioritize this job?",
+    "Priority increased": "Job has been prioritized",
+    "The task will be dispatched soon.": "The task will be dispatched soon.",
+    "Authorize": "Authorize",
+    "Disconnect": "Disconnect"
+}
