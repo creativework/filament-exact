@@ -1,13 +1,24 @@
 # ExactOnline Panel for FilamentPHP
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/creativework/filament-exact.svg?style=flat-square)](https://packagist.org/packages/creativework/filament-exact)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/creativework/filament-exact/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/creativework/filament-exact/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/creativework/filament-exact/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/creativework/filament-exact/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/creativework/filament-exact.svg?style=flat-square)](https://packagist.org/packages/creativework/filament-exact)
 
+## This package is made by [Creative Work](https://creativework.nl)
 
+Hi! We are Creative Work. A company from Buitenpost in the Nederlands.
+We are specialized in creating websites and web applications focused on automation for our customers.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+## About the package
+
+This package implements a custom ExactQueue to handle the ExactOnline API.
+The jobs inside the Queue will be shown in a panel inside your Filament app.
+
+## Why should I use this package?
+
+ExactOnline is a popular accounting software in the Netherlands. This package will help you to integrate ExactOnline with your Filament app.
+When errors occur, you can easily see them in the panel and fix them. You can also see the status of the jobs and the progress of the jobs.
+
+The package keeps track of the jobs and the rate limit of the ExactOnline API. When the rate limit is reached, the jobs will be paused and will be resumed when the rate limit is reset.
 
 ## Installation
 
@@ -30,48 +41,42 @@ You can publish the config file with:
 php artisan vendor:publish --tag="filament-exact-config"
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-exact-views"
-```
-
-This is the contents of the published config file:
+Then add the plugin to your `PanelProvider`
 
 ```php
-return [
-];
+use creativework\FilamentExact\FilamentExactPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugin(FilamentExactPlugin::make());
+}
+```
+
+Specify the scheduler in your `bootstrap/app.php`'
+```php
+->withSchedule(function (Schedule $schedule) {
+    if (app()->environment('production')) {
+        $schedule->command('exact:process-queue')->everyMinute();
+    }
+})
 ```
 
 ## Usage
-
 ```php
-$filamentExact = new creativework\FilamentExact();
-echo $filamentExact->echoPhrase('Hello, creativework!');
+use App\Jobs\ImportInvoiceJob;
+
+ExactQueue::create([
+    "job" => ImportInvoiceJob::class,
+    "parameters" => [
+        "invoice_id" => $invoice->id,
+    ],
+]);
 ```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
 - [Jessedev1](https://github.com/Jessedev1)
-- [All Contributors](../../contributors)
 
 ## License
 
