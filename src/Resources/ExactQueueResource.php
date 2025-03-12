@@ -109,7 +109,7 @@ class ExactQueueResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordUrl(null)
+            ->recordUrl(fn ($record) => static::getUrl('view', ['record' => $record]))
             ->defaultSort('created_at', 'desc')
             ->paginated(50, 100, 'all')
             ->columns([
@@ -134,10 +134,7 @@ class ExactQueueResource extends Resource
                     ->searchable(),
             ])
             ->filters([])
-            ->actions([
-                ViewAction::make(),
-                PrioritizeJobAction::make('table')
-            ]);
+            ->actions([]);
     }
 
     public static function getPages(): array
