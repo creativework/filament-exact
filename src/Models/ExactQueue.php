@@ -3,11 +3,13 @@
 namespace creativework\FilamentExact\Models;
 
 use creativework\FilamentExact\Enums\QueueStatusEnum;
+use creativework\FilamentExact\Mail\ExactErrorMail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ExactQueue extends Model
 {
@@ -66,22 +68,15 @@ class ExactQueue extends Model
         return $query->where('status', QueueStatusEnum::FAILED);
     }
 
-    public function dispatch()
-    {
-        if (! class_exists($this->job)) {
-            Log::error('Job class does not exist', ['job' => $this->job]);
-            $this->update([
-                'status' => QueueStatusEnum::FAILED,
-                'response' => 'Job class does not exist',
-            ]);
-
+    public function notify($id, $message) {
+        $recipients = config('filament-exact.notifications.mail.to');
+        if (! $recipients) {
             return;
         }
 
-        $instance = new $this->job(...$this->parameters);
-        dispatch($instance);
-        $this->update([
-            'status' => QueueStatusEnum::PROCESSING,
-        ]);
+        foreach ($recipients as $recipient) {
+            ray($recipient);
+            Mail::to($recipient)->send(new ExactErrorMail("Error in Exact Queue task $id", $message));
+        }
     }
 }
