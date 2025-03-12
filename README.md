@@ -19,6 +19,14 @@ We are specialized in creating websites and web applications focused on automati
 - ✅ **Job Progress** to see the progress of the jobs right from your Filament panel.
 - ✅ **Priority Queue** to prioritize jobs based on their importance.
 
+### Upcoming features
+- 🔈 **Webhooks** to automatically process ExactOnline events.
+- 🔄 **Retry-policy** to automatically retry failed jobs.
+- 🚀 **Realtime overview** of the queue status.
+
+### Exact PHP Client
+This package is making use of the [Picqer Exact PHP Client](https://github.com/picqer/exact-php-client) to interact with the ExactOnline API. You need to have an ExactOnline account and an API key to use this package.
+
 ![Filament Exact](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact.png)
 
 ## 📥 Installation
