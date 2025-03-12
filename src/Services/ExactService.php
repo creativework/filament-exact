@@ -8,6 +8,7 @@ use Picqer\Financials\Exact\Connection;
 class ExactService
 {
     protected Connection $connection;
+
     protected ExactToken $token;
 
     public function __construct()
@@ -25,15 +26,15 @@ class ExactService
         }
 
         $this->token = ExactToken::firstOrNew([]);
-        if (!empty($this->token->access_token)) {
+        if (! empty($this->token->access_token)) {
             $this->connection->setAccessToken(unserialize($this->token->access_token));
         }
 
-        if (!empty($this->token->refresh_token)) {
+        if (! empty($this->token->refresh_token)) {
             $this->connection->setRefreshToken($this->token->refresh_token);
         }
 
-        if (!empty($this->token->expires_in)) {
+        if (! empty($this->token->expires_in)) {
             $this->connection->setTokenExpires($this->token->expires_in);
         }
     }
@@ -51,7 +52,7 @@ class ExactService
             $this->connection->setAuthorizationCode($code);
             $this->connection->connect();
         } catch (\Exception $e) {
-            throw new \Exception('Could not authorize Exact: ' . $e->getMessage());
+            throw new \Exception('Could not authorize Exact: '.$e->getMessage());
         }
 
         $this->updateToken('client_id', config('filament-exact.exact.client_id'));

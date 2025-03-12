@@ -23,7 +23,7 @@ class ProcessExactQueue extends Command
             ->orderBy('created_at', 'asc')
             ->first();
 
-        if (!$queue) {
+        if (! $queue) {
             return;
         }
 

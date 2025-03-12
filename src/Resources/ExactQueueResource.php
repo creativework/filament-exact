@@ -31,12 +31,12 @@ class ExactQueueResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getLabel(): ?string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getNavigationIcon(): string
@@ -46,7 +46,7 @@ class ExactQueueResource extends Resource
 
     public function getTitle(): string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getModelLabel(): string

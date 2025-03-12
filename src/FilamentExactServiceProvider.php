@@ -7,7 +7,6 @@ use creativework\FilamentExact\Commands\PruneExactQueue;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Filesystem\Filesystem;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -77,15 +76,6 @@ class FilamentExactServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
-
-        // Register Command Scheduler
-        if ($this->app->runningInConsole()) {
-            $this->app->booted(function() {
-                $schedule = $this->app->make(Schedule::class);
-                $schedule->command(ProcessExactQueue::class)->everyMinute();
-                $schedule->command(PruneExactQueue::class)->daily();
-            });
-        }
     }
 
     protected function getAssetPackageName(): ?string
@@ -141,7 +131,7 @@ class FilamentExactServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return collect(app(Filesystem::class)->files(__DIR__ . '/../database/migrations'))
+        return collect(app(Filesystem::class)->files(__DIR__.'/../database/migrations'))
             ->map(fn (SplFileInfo $file) => str_replace('.php.stub', '', $file->getBasename()))
             ->toArray();
     }
