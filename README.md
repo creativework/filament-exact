@@ -53,7 +53,7 @@ public function panel(Panel $panel): Panel
 }
 ```
 ### 5. Scheduler configuration
-Specify the scheduler in your `bootstrap/app.php`'
+Specify the scheduler in your `bootstrap/app.php` file:
 ```php
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
