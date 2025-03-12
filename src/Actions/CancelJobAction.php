@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CancelJobAction
 {
-    public static function make($type = 'general'): Action|TableAction|BulkAction
+    public static function make($type = 'general'): Action | TableAction | BulkAction
     {
         switch ($type) {
             case 'table':
@@ -26,6 +26,7 @@ class CancelJobAction
                     ->action(function (TableAction $action, ExactQueue $record) {
                         return static::handle($action, $record);
                     });
+
                 break;
             case 'bulk':
                 return BulkAction::make('cancel')
@@ -40,6 +41,7 @@ class CancelJobAction
                             static::handle($action, $record);
                         }
                     });
+
                 break;
             default:
                 return Action::make('cancel')
@@ -52,11 +54,13 @@ class CancelJobAction
                     ->action(function (Action $action, ExactQueue $record, $livewire = null) {
                         return static::handle($action, $record, $livewire);
                     });
+
                 break;
         }
     }
 
-    public static function handle(Action|TableAction|BulkAction $action, ExactQueue $record, $livewire = null) {
+    public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
+    {
         $record->update([
             'status' => QueueStatusEnum::FAILED,
             'response' => 'Job has been cancelled by ' . auth()->user()->name,
@@ -64,7 +68,7 @@ class CancelJobAction
 
         if (! is_null($livewire)) {
             $livewire->refreshFormData([
-                'status', 'response'
+                'status', 'response',
             ]);
         }
 

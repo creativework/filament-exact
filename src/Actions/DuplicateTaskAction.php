@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DuplicateTaskAction
 {
-    public static function make($type = 'general'): Action|TableAction|BulkAction
+    public static function make($type = 'general'): Action | TableAction | BulkAction
     {
         switch ($type) {
             case 'table':
@@ -25,6 +25,7 @@ class DuplicateTaskAction
                     ->action(function (TableAction $action, ExactQueue $record) {
                         return static::handle($action, $record);
                     });
+
                 break;
             case 'bulk':
                 return BulkAction::make('duplicate')
@@ -39,6 +40,7 @@ class DuplicateTaskAction
                             static::handle($action, $record);
                         }
                     });
+
                 break;
             default:
                 return Action::make('duplicate')
@@ -50,11 +52,13 @@ class DuplicateTaskAction
                     ->action(function (Action $action, ExactQueue $record, $livewire = null) {
                         return static::handle($action, $record, $livewire);
                     });
+
                 break;
         }
     }
 
-    public static function handle(Action|TableAction|BulkAction $action, ExactQueue $record, $livewire = null) {
+    public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
+    {
 
         $newRecord = $record->replicate();
         $newRecord->status = QueueStatusEnum::PENDING;
@@ -63,7 +67,7 @@ class DuplicateTaskAction
 
         if (! is_null($livewire)) {
             $livewire->refreshFormData([
-                'status', 'response'
+                'status', 'response',
             ]);
         }
 
