@@ -15,9 +15,8 @@ class PruneExactQueue extends Command
         $class = config('filament-exact.model');
         $class = new $class;
 
+        // Check if pruning is enabled
         if (! config('filament-exact.database.pruning.enabled', false)) {
-            $this->info('Pruning is disabled for exact queue records');
-
             return;
         }
 
