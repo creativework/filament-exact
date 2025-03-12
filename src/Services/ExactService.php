@@ -52,7 +52,7 @@ class ExactService
             $this->connection->setAuthorizationCode($code);
             $this->connection->connect();
         } catch (\Exception $e) {
-            throw new \Exception('Could not authorize Exact: '.$e->getMessage());
+            throw new \Exception('Could not authorize Exact: ' . $e->getMessage());
         }
 
         $this->updateToken('client_id', config('filament-exact.exact.client_id'));

@@ -20,7 +20,7 @@ class ListExactQueue extends ListRecords
 
     public function getTitle(): string
     {
-        return __('Exact').' '.__('Queue');
+        return __('Exact') . ' ' . __('Queue');
     }
 
     protected function getActions(): array
