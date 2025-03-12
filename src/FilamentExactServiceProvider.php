@@ -32,7 +32,8 @@ class FilamentExactServiceProvider extends PackageServiceProvider
                 $command
                     ->publishConfigFile()
                     ->publishMigrations()
-                    ->askToRunMigrations();
+                    ->askToRunMigrations()
+                    ->askToStarRepoOnGitHub('creativework/filament-exact');
             });
 
         $configFileName = $package->shortName();

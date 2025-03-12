@@ -19,7 +19,7 @@ return [
 
     'notifications' => [
         'mail' => [
-            'to' => ['test@example.com'],
+            'to' => [],
         ],
     ],
 
