@@ -2,4 +2,8 @@
 
 use creativework\FilamentExact\Controllers\ExactController;
 
-Route::get(config('filament-exact.exact.callback_path'), [ExactController::class, 'callback'])->name('exact.callback');
+// Get path from redirect url
+$redirectPath = parse_url(config('filament-exact.exact.redirect_uri'), PHP_URL_PATH);
+if ($redirectPath) {
+    Route::get($redirectPath, [ExactController::class, 'callback'])->name('exact.callback');
+}

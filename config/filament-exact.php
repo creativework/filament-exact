@@ -24,12 +24,11 @@ return [
     ],
 
     'exact' => [
-        'redirect_uri' => '',
-        'callback_path' => 'exact/callback',
-        'client_id' => '',
-        'client_secret' => '',
-        'division' => '',
-        'webhook_secret' => '',
+        'redirect_uri' => env('EXACT_ONLINE_REDIRECT_URI'),
+        'client_id' => env('EXACT_ONLINE_CLIENT_ID'),
+        'client_secret' => env('EXACT_ONLINE_CLIENT_SECRET'),
+        'division' => env('EXACT_ONLINE_DIVISION'),
+        'webhook_secret' => env('EXACT_ONLINE_WEBHOOK_SECRET'),
     ],
 
     'navigation' => [
