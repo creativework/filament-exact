@@ -18,5 +18,15 @@
     "Priority increased": "Prioriteit verhoogd",
     "The task will be dispatched soon.": "De taak zal spoedig op worden gepakt.",
     "Authorize": "Autoriseren",
-    "Disconnect": "Verbreken"
+    "Disconnect": "Verbreken",
+    "Job Details": "Taakdetails",
+    "Details about the job.": "Details over de taak.",
+    "Cancel Job": "Taak annuleren",
+    "Are you sure you want to cancel this job?": "Weet je zeker dat je deze taak wilt annuleren?",
+    "Cancelled successfully": "Succesvol geannuleerd",
+    "The job has been cancelled and will not be dispatched.": "De taak is geannuleerd en zal niet worden uitgevoerd.",
+    "Duplicate Job": "Taak dupliceren",
+    "Are you sure you want to duplicate this job?": "Weet je zeker dat je deze taak wilt dupliceren?",
+    "Duplicated successfully": "Successvol gedupliceerd",
+    "The job has been duplicated and added to the queue.": "De taak is gedupliceerd en toegevoegd aan de wachtrij."
 }

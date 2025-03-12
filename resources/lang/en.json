@@ -19,5 +19,15 @@
     "Priority increased": "Job has been prioritized",
     "The task will be dispatched soon.": "The task will be dispatched soon.",
     "Authorize": "Authorize",
-    "Disconnect": "Disconnect"
+    "Disconnect": "Disconnect",
+    "Job Details": "Job Details",
+    "Details about the job.": "Details about the job.",
+    "Cancel Job": "Cancel Job",
+    "Are you sure you want to cancel this job?": "Are you sure you want to cancel this job?",
+    "Cancelled successfully": "Cancelled successfully",
+    "The job has been cancelled and will not be dispatched.": "The job has been cancelled and will not be dispatched.",
+    "Duplicate Job": "Duplicate Job",
+    "Are you sure you want to duplicate this job?": "Are you sure you want to duplicate this job?",
+    "Duplicated successfully": "Duplicated successfully",
+    "The job has been duplicated and added to the queue.": "The job has been duplicated and added to the queue."
 }

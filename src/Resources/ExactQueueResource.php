@@ -2,12 +2,21 @@
 
 namespace CreativeWork\FilamentExact\Resources;
 
+use CreativeWork\FilamentExact\Actions\PrioritizeJobAction;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,7 +35,7 @@ class ExactQueueResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-exact.navigation.grouo', __('Exact'));
+        return config('filament-exact.navigation.group', __('Exact'));
     }
 
     public static function getNavigationLabel(): string
@@ -59,10 +68,47 @@ class ExactQueueResource extends Resource
         return __('Jobs');
     }
 
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Section::make(__('Job Details'))
+                    ->description(__('Details about the job.'))
+                    ->schema([
+                        TextInput::make('id')
+                            ->label(__('Number'))
+                            ->columnSpan(1)
+                            ->disabled(),
+                        TextInput::make('job')
+                            ->label(__('Job'))
+                            ->columnSpan(1)
+                            ->disabled(),
+                        Select::make('status')
+                            ->label(__('Status'))
+                            ->options(QueueStatusEnum::class)
+                            ->columnSpan(2)
+                            ->disabled(),
+                        TextInput::make('priority')
+                            ->label(__('Priority'))
+                            ->columnSpan(2)
+                            ->disabled(),
+                        Textarea::make('parameters')
+                            ->label(__('Parameters'))
+                            ->formatStateUsing(fn ($state) => json_encode($state, JSON_THROW_ON_ERROR))
+                            ->columnSpan(2)
+                            ->disabled(),
+                        TextArea::make('response')
+                            ->label(__('Response'))
+                            ->columnSpan(2)
+                            ->disabled(),
+                    ])
+                    ->columns(2)
+            ]);
+    }
+
     public static function table(Table $table): Table
     {
         return $table
-            ->recordAction('view')
             ->recordUrl(null)
             ->defaultSort('created_at', 'desc')
             ->paginated(50, 100, 'all')
@@ -89,22 +135,8 @@ class ExactQueueResource extends Resource
             ])
             ->filters([])
             ->actions([
-                Action::make('prioritize')
-                    ->label(__('Increase Priority'))
-                    ->icon('heroicon-o-exclamation-triangle')
-                    ->color('primary')
-                    ->requiresConfirmation()
-                    ->modalDescription(__('Are you sure you want to increase the priority of this job?'))
-                    ->visible(fn ($record) => $record->status === QueueStatusEnum::PENDING)
-                    ->action(function ($record) {
-                        $record->update(['priority' => 10]);
-
-                        Notification::make()
-                            ->title(__('Priority increased'))
-                            ->body(__('The task will be dispatched soon.'))
-                            ->success()
-                            ->send();
-                    }),
+                ViewAction::make(),
+                PrioritizeJobAction::make('table')
             ]);
     }
 
@@ -112,7 +144,7 @@ class ExactQueueResource extends Resource
     {
         return [
             'index' => ListExactQueue::route('/'),
-            'view' => ViewExactQueue::route('/{record}/view'),
+            'view' => ViewExactQueue::route('/{record}'),
         ];
     }
 }
