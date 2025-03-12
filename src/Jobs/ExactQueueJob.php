@@ -10,7 +10,8 @@ use Picqer\Financials\Exact\Connection;
 
 abstract class ExactQueueJob implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Define job middleware.
