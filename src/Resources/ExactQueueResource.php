@@ -6,17 +6,13 @@ use CreativeWork\FilamentExact\Actions\PrioritizeJobAction;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
-use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -102,7 +98,7 @@ class ExactQueueResource extends Resource
                             ->columnSpan(2)
                             ->disabled(),
                     ])
-                    ->columns(2)
+                    ->columns(2),
             ]);
     }
 
