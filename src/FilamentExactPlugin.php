@@ -1,8 +1,8 @@
 <?php
 
-namespace creativework\FilamentExact;
+namespace CreativeWork\FilamentExact;
 
-use creativework\FilamentExact\Resources\ExactQueueResource;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 

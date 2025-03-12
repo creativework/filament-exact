@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "creativework\\FilamentExact\\": "src/"
+            "CreativeWork\\FilamentExact\\": "src/"
         }
     },
     "scripts": {
@@ -47,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "creativework\\FilamentExact\\FilamentExactServiceProvider"
+                "CreativeWork\\FilamentExact\\FilamentExactServiceProvider"
             ],
             "aliases": {
-                "FilamentMails": "creativework\\FilamentExact\\Facades\\FilamentExact"
+                "FilamentExact": "CreativeWork\\FilamentExact\\Facades\\FilamentExact"
             }
         }
     },

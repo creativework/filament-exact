@@ -1,9 +1,9 @@
 <?php
 
-namespace creativework\FilamentExact;
+namespace CreativeWork\FilamentExact;
 
-use creativework\FilamentExact\Commands\ProcessExactQueue;
-use creativework\FilamentExact\Commands\PruneExactQueue;
+use CreativeWork\FilamentExact\Commands\ProcessExactQueue;
+use CreativeWork\FilamentExact\Commands\PruneExactQueue;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
@@ -33,7 +33,7 @@ class FilamentExactServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('creativework/filament-exact');
+                    ->askToStarRepoOnGitHub('Jessedev1/filament-exact');
             });
 
         $configFileName = $package->shortName();

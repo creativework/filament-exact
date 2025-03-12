@@ -1,10 +1,10 @@
 <?php
 
-namespace creativework\FilamentExact\Resources;
+namespace CreativeWork\FilamentExact\Resources;
 
-use creativework\FilamentExact\Enums\QueueStatusEnum;
-use creativework\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
-use creativework\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
+use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;

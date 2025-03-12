@@ -1,10 +1,10 @@
 <?php
 
-namespace creativework\FilamentExact\Resources\ExactQueueResource\Pages;
+namespace CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages;
 
-use creativework\FilamentExact\Models\ExactToken;
-use creativework\FilamentExact\Resources\ExactQueueResource;
-use creativework\FilamentExact\Services\ExactService;
+use CreativeWork\FilamentExact\Models\ExactToken;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource;
+use CreativeWork\FilamentExact\Services\ExactService;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Components\Tab;

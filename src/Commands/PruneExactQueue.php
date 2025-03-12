@@ -1,6 +1,6 @@
 <?php
 
-namespace creativework\FilamentExact\Commands;
+namespace CreativeWork\FilamentExact\Commands;
 
 use Illuminate\Console\Command;
 

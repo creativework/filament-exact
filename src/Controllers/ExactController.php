@@ -1,10 +1,10 @@
 <?php
 
-namespace creativework\FilamentExact\Controllers;
+namespace CreativeWork\FilamentExact\Controllers;
 
 use App\Http\Controllers\Controller;
-use creativework\FilamentExact\Resources\ExactQueueResource;
-use creativework\FilamentExact\Services\ExactService;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource;
+use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Http\Request;
 
 class ExactController extends Controller

@@ -44,7 +44,7 @@ EXACT_ONLINE_CLIENT_DIVISION=""
 
 ### 4. Add the plugin to your `PanelProvider`
 ```php
-use creativework\FilamentExact\FilamentExactPlugin;
+use CreativeWork\FilamentExact\FilamentExactPlugin;
 
 public function panel(Panel $panel): Panel
 {
@@ -140,7 +140,7 @@ return [
 ### Adding a Job to the Exact Queue
 ```php
 use App\Jobs\ImportProductsJob;
-use creativework\FilamentExact\Models\ExactQueue;
+use CreativeWork\FilamentExact\Models\ExactQueue;
 
 ExactQueue::create([
     "job" => ImportProductsJob::class,
@@ -152,7 +152,7 @@ ExactQueue::create([
 ```
 ### Create a Custom Job
 ```php
-use creativework\FilamentExact\Jobs\ExactQueueJob;
+use CreativeWork\FilamentExact\Jobs\ExactQueueJob;
 use Exception;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\SerializesModels;

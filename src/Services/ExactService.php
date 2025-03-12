@@ -1,8 +1,8 @@
 <?php
 
-namespace creativework\FilamentExact\Services;
+namespace CreativeWork\FilamentExact\Services;
 
-use creativework\FilamentExact\Models\ExactToken;
+use CreativeWork\FilamentExact\Models\ExactToken;
 use Picqer\Financials\Exact\Connection;
 
 class ExactService

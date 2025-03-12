@@ -1,11 +1,11 @@
 <?php
 
-namespace creativework\FilamentExact\Commands;
+namespace CreativeWork\FilamentExact\Commands;
 
-use creativework\FilamentExact\Enums\QueueStatusEnum;
-use creativework\FilamentExact\Mail\ExactErrorMail;
-use creativework\FilamentExact\Models\ExactQueue;
-use creativework\FilamentExact\Services\ExactService;
+use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
+use CreativeWork\FilamentExact\Mail\ExactErrorMail;
+use CreativeWork\FilamentExact\Models\ExactQueue;
+use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Log;

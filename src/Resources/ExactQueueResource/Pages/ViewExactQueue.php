@@ -1,8 +1,8 @@
 <?php
 
-namespace creativework\FilamentExact\Resources\ExactQueueResource\Pages;
+namespace CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages;
 
-use creativework\FilamentExact\Resources\ExactQueueResource;
+use CreativeWork\FilamentExact\Resources\ExactQueueResource;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewExactQueue extends ViewRecord

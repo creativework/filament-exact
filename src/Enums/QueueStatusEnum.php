@@ -1,6 +1,6 @@
 <?php
 
-namespace creativework\FilamentExact\Enums;
+namespace CreativeWork\FilamentExact\Enums;
 
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;

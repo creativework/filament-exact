@@ -1,5 +1,5 @@
 <?php
 
-namespace creativework\FilamentExact;
+namespace CreativeWork\FilamentExact;
 
 class FilamentExact {}

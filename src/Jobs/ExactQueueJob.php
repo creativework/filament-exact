@@ -1,6 +1,6 @@
 <?php
 
-namespace creativework\FilamentExact\Jobs;
+namespace CreativeWork\FilamentExact\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

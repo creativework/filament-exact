@@ -1,9 +1,9 @@
 <?php
 
-namespace creativework\FilamentExact\Models;
+namespace CreativeWork\FilamentExact\Models;
 
-use creativework\FilamentExact\Enums\QueueStatusEnum;
-use creativework\FilamentExact\Mail\ExactErrorMail;
+use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
+use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
