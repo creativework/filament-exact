@@ -29,6 +29,7 @@ return [
         'client_secret' => env('EXACT_ONLINE_CLIENT_SECRET'),
         'division' => env('EXACT_ONLINE_DIVISION'),
         'webhook_secret' => env('EXACT_ONLINE_WEBHOOK_SECRET'),
+        'webhook_uri' => env('EXACT_ONLINE_WEBHOOK_URI'),
     ],
 
     'navigation' => [

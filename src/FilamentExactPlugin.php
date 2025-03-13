@@ -8,6 +8,9 @@ use Filament\Panel;
 
 class FilamentExactPlugin implements Plugin
 {
+
+    protected array $webhooks = [];
+
     public function getId(): string
     {
         return 'filament-exact';
@@ -29,6 +32,18 @@ class FilamentExactPlugin implements Plugin
     public static function make(): static
     {
         return app(static::class);
+    }
+
+    public function webhooks(array $webhooks): static
+    {
+        $this->webhooks = $webhooks;
+
+        return $this;
+    }
+
+    public function getWebhooks(): array
+    {
+        return $this->webhooks;
     }
 
     public static function get(): static

@@ -4,6 +4,7 @@ namespace CreativeWork\FilamentExact;
 
 use CreativeWork\FilamentExact\Commands\ProcessExactQueue;
 use CreativeWork\FilamentExact\Commands\PruneExactQueue;
+use CreativeWork\FilamentExact\Commands\RegisterExactWebhookCommand;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
@@ -100,6 +101,7 @@ class FilamentExactServiceProvider extends PackageServiceProvider
         return [
             ProcessExactQueue::class,
             PruneExactQueue::class,
+            RegisterExactWebhookCommand::class,
         ];
     }
 
