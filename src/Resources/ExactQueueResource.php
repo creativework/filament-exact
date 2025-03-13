@@ -2,7 +2,6 @@
 
 namespace CreativeWork\FilamentExact\Resources;
 
-use CreativeWork\FilamentExact\Actions\PrioritizeJobAction;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
@@ -12,7 +11,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 

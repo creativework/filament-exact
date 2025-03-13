@@ -2,7 +2,6 @@
 
 namespace CreativeWork\FilamentExact\Commands;
 
-use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\FilamentExactPlugin;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use CreativeWork\FilamentExact\Services\ExactService;
@@ -37,13 +36,13 @@ class RegisterExactWebhookCommand extends Command
                 Log::error('Error registering Exact Online Webooks', [
                     'error' => $e->getMessage(),
                     'topic' => $webhook->topic,
-                    'slug' => $webhook->slug
+                    'slug' => $webhook->slug,
                 ]);
 
                 $recipients = config('filament-exact.notifications.mail.to');
                 if ($recipients) {
                     foreach ($recipients as $recipient) {
-                        Mail::to($recipient)->send(new ExactErrorMail("Error registering Exact Online webhook: " . $webhook->topic, $e->getMessage()));
+                        Mail::to($recipient)->send(new ExactErrorMail('Error registering Exact Online webhook: ' . $webhook->topic, $e->getMessage()));
                     }
                 }
             }

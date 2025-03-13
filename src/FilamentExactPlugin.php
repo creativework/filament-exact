@@ -8,7 +8,6 @@ use Filament\Panel;
 
 class FilamentExactPlugin implements Plugin
 {
-
     protected array $webhooks = [];
 
     public function getId(): string
