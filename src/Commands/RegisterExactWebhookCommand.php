@@ -19,7 +19,7 @@ class RegisterExactWebhookCommand extends Command
 
     public function handle(ExactService $exactService): void
     {
-        $connection = $exactService->getConnection();
+        $connection = $exactService->connect();
 
         $plugin = FilamentExactPlugin::get();
         $webhooks = $plugin->getWebhooks();

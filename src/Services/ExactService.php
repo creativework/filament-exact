@@ -50,7 +50,7 @@ class ExactService
 
         try {
             $this->connection->setAuthorizationCode($code);
-            $this->connection->connect();
+            $this->connection->checkOrAcquireAccessToken();
         } catch (\Exception $e) {
             throw new \Exception('Could not authorize Exact: ' . $e->getMessage());
         }
@@ -61,6 +61,20 @@ class ExactService
         $this->updateToken('expires_in', $this->connection->getTokenExpires());
     }
 
+    public function connect(): Connection
+    {
+        // Refresh tokens if needed
+        $this->connection->checkOrAcquireAccessToken();
+
+        // Update tokens in database
+        $this->updateToken('client_id', config('filament-exact.exact.client_id'));
+        $this->updateToken('access_token', serialize($this->connection->getAccessToken()));
+        $this->updateToken('refresh_token', $this->connection->getRefreshToken());
+        $this->updateToken('expires_in', $this->connection->getTokenExpires());
+
+        return $this->connection;
+    }
+
     public function getConnection(): Connection
     {
         return $this->connection;
@@ -69,6 +83,15 @@ class ExactService
     public function setDivision($division)
     {
         $this->connection->setDivision($division);
+    }
+
+    private function tokenHasExpired(): bool
+    {
+        if (empty($this->connection->getTokenExpires())){
+            return true;
+        }
+
+        return $this->connection->getTokenExpires() < time();
     }
 
     protected function updateToken(string $key, string $code): void

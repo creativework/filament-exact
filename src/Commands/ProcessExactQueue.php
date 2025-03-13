@@ -5,6 +5,7 @@ namespace CreativeWork\FilamentExact\Commands;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use CreativeWork\FilamentExact\Models\ExactQueue;
+use CreativeWork\FilamentExact\Models\ExactToken;
 use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -27,8 +28,15 @@ class ProcessExactQueue extends Command
             return;
         }
 
+        if (ExactToken::firstOrNew()->isLocked()) {
+            return;
+        }
+
         try {
-            $queue->update(['status' => QueueStatusEnum::PENDING]);
+            $queue->update(['status' => QueueStatusEnum::PROCESSING]);
+
+            // Lock queue
+            ExactToken::firstOrNew()->lock();
 
             $jobClass = $queue->job;
             $parameters = $queue->parameters ?? [];
@@ -37,15 +45,21 @@ class ProcessExactQueue extends Command
             $job = new $jobClass(...array_values($parameters));
 
             // Get the authorized connection (automatic authorization happens here)
-            $connection = $exactService->getConnection();
+            $connection = $exactService->connect();
 
             // Execute the job's handle method with the connection
             $job->handle($connection);
 
+            // Update queue status
             $queue->update(['status' => QueueStatusEnum::COMPLETED]);
+
+            // Unlock queue
+            ExactToken::firstOrNew()->unlock();
+
         } catch (\Exception $e) {
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
             $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
+            ExactToken::firstOrNew()->unlock();
 
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {
