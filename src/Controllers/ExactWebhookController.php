@@ -23,13 +23,13 @@ class ExactWebhookController extends Controller
     {
         try {
             $webhook = collect($this->plugin->getWebhooks())->firstWhere('slug', $slug);
-            if (!$webhook) {
+            if (! $webhook) {
                 return response()->json(['error' => 'Webhook not registered'], 404);
             }
 
             // Retrieve webhook secret from config
             $webhookSecret = config('filament-exact.exact.webhook_secret');
-            if (!$webhookSecret) {
+            if (! $webhookSecret) {
                 return response()->json(['error' => 'Webhook secret not configured'], 500);
             }
 
@@ -38,19 +38,19 @@ class ExactWebhookController extends Controller
 
             // Authenticate the request
             $authenticate = $webhook->authenticate($requestContent, $webhookSecret);
-            if (!$authenticate) {
+            if (! $authenticate) {
                 return response()->json(['error' => 'Error: Unauthorized webhook'], 201);
             }
 
             // Decode the payload
             $payload = json_decode($requestContent, true);
-            if (!isset($payload['Content'])) {
+            if (! isset($payload['Content'])) {
                 return response()->json(['error' => 'Error: Invalid webhook payload'], 201);
             }
 
             // Validate the payload structure
             $content = $payload['Content'];
-            if (!isset($content['Topic'], $content['Action'], $content['Division'], $content['Key'])) {
+            if (! isset($content['Topic'], $content['Action'], $content['Division'], $content['Key'])) {
                 return response()->json(['error' => 'Error: Invalid webhook payload'], 201);
             }
 
@@ -64,7 +64,7 @@ class ExactWebhookController extends Controller
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {
                 foreach ($recipients as $recipient) {
-                    Mail::to($recipient)->send(new ExactErrorMail("Error registering Exact Online webhook", $e->getMessage()));
+                    Mail::to($recipient)->send(new ExactErrorMail('Error registering Exact Online webhook', $e->getMessage()));
                 }
             }
 

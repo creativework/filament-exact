@@ -6,7 +6,6 @@ use Picqer\Financials\Exact\Webhook\Authenticatable;
 
 abstract class ExactWebhook
 {
-
     use Authenticatable;
 
     /**
