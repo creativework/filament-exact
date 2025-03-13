@@ -87,7 +87,7 @@ class ExactService
 
     private function tokenHasExpired(): bool
     {
-        if (empty($this->connection->getTokenExpires())){
+        if (empty($this->connection->getTokenExpires())) {
             return true;
         }
 
