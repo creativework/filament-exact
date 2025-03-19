@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExactToken extends Model
 {
     protected $fillable = [
-        'locked'
+        'locked',
     ];
 
     public function lock(): void
