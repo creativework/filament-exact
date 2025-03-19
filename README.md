@@ -180,7 +180,7 @@ ExactQueue::create([
 use CreativeWork\FilamentExact\Jobs\ExactQueueJob;
 use Exception;
 use Log;
-use Picqer\Financials\Exact\Connection;
+use CreativeWork\FilamentExact\Services\ExactService;
 use Picqer\Financials\Exact\Item;
 use App\Models\Product;
 
@@ -194,8 +194,10 @@ class ImportProductsJob extends ExactQueueJob
         $this->id = $id;
     }
 
-    public function handle(Connection $connection): void
+    public function handle(ExactService $service): void
     {
+        $connection = $service->getConnection();
+        
         $itemWrapper = new Item($connection);
         $item = $itemWrapper->find($this->id);
         if (! $item) {

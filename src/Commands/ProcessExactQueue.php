@@ -44,11 +44,11 @@ class ProcessExactQueue extends Command
             // Instantiate the job; assuming parameters are passed as an associative array
             $job = new $jobClass(...array_values($parameters));
 
-            // Get the authorized connection (automatic authorization happens here)
-            $connection = $exactService->connect();
+            // Connect service to Exact Online
+            $exactService->connect();
 
             // Execute the job's handle method with the connection
-            $job->handle($connection);
+            $job->handle($exactService);
 
             // Update queue status
             $queue->update(['status' => QueueStatusEnum::COMPLETED]);

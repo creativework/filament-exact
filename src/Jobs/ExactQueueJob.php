@@ -2,6 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Jobs;
 
+use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\Middleware\RateLimited;
@@ -26,5 +27,5 @@ abstract class ExactQueueJob implements ShouldQueue
     /**
      * Your custom job must implement this method
      */
-    abstract public function handle(Connection $connection): void;
+    abstract public function handle(ExactService $service): void;
 }

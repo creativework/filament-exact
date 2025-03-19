@@ -75,6 +75,15 @@ class ExactService
         return $this->connection;
     }
 
+    public function refresh(): Connection
+    {
+        if (! $this->tokenHasExpired()) {
+            return $this->connection;
+        }
+
+        return $this->connect();
+    }
+
     public function getConnection(): Connection
     {
         return $this->connection;
@@ -87,7 +96,7 @@ class ExactService
 
     private function tokenHasExpired(): bool
     {
-        if (empty($this->connection->getTokenExpires())){
+        if (empty($this->connection->getTokenExpires())) {
             return true;
         }
 
