@@ -37,6 +37,7 @@ class RegisterExactWebhookCommand extends Command
                 // Ignore if message contains 'Gegeven bestaat reeds'
                 if (strpos($e->getMessage(), 'Gegeven bestaat reeds') !== false) {
                     $this->info("Webhook bestaat reeds: {$webhook->topic} -> {$webhook->slug}");
+
                     continue;
                 }
 
