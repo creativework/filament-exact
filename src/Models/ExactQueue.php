@@ -75,7 +75,6 @@ class ExactQueue extends Model
         }
 
         foreach ($recipients as $recipient) {
-            ray($recipient);
             Mail::to($recipient)->send(new ExactErrorMail("Error in Exact Queue task $id", $message));
         }
     }

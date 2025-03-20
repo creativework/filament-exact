@@ -1,6 +1,6 @@
 {
     "name": "creativework/filament-exact",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "ExactOnline Panel for FilamentPHP",
     "keywords": [
         "creativework",
@@ -24,12 +24,14 @@
         "php": "^8.1",
         "filament/filament": "^3.0",
         "picqer/exact-php-client": "^4.5",
-        "spatie/laravel-package-tools": "^1.15.0"
+        "spatie/laravel-package-tools": "^1.15.0",
+        "spatie/laravel-permission": "^6.16"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
-        "orchestra/testbench": "^8.0",
+        "orchestra/testbench": "^8.34",
+        "pestphp/pest": "^2.36",
         "spatie/laravel-ray": "^1.26"
     },
     "autoload": {
@@ -37,12 +39,22 @@
             "CreativeWork\\FilamentExact\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

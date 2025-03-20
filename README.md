@@ -329,6 +329,13 @@ You may need to authorize the application again. You can do this from the Filame
 
 ---
 
+## 🧪 Testing
+```bash
+composer test
+```
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
 ## 🔄 Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

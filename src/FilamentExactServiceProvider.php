@@ -5,10 +5,12 @@ namespace CreativeWork\FilamentExact;
 use CreativeWork\FilamentExact\Commands\ProcessExactQueue;
 use CreativeWork\FilamentExact\Commands\PruneExactQueue;
 use CreativeWork\FilamentExact\Commands\RegisterExactWebhookCommand;
+use CreativeWork\FilamentExact\Testing\TestsFilamentExact;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
+use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -78,6 +80,9 @@ class FilamentExactServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
+
+        // Testing
+        Testable::mixin(new TestsFilamentExact);
     }
 
     protected function getAssetPackageName(): ?string

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/jessedev/Projecten/Plugins/filament-exact/phpunit.xml.dist" tests="3" assertions="5" errors="0" failures="0" skipped="0" time="0.281518">
+    <testsuite name="Vormkracht10 Test Suite" tests="3" assertions="5" errors="0" failures="0" skipped="0" time="0.281518">
+      <testsuite name="Tests\Feature\FilamentExactTest" file="tests/Feature/FilamentExactTest.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.131045">
+        <testcase name="it registers the FilamentExactServiceProvider" file="tests/Feature/FilamentExactTest.php::it registers the FilamentExactServiceProvider" class="Tests\Feature\FilamentExactTest" classname="Tests.Feature.FilamentExactTest" assertions="1" time="0.124960"/>
+        <testcase name="it loads the package configuration" file="tests/Feature/FilamentExactTest.php::it loads the package configuration" class="Tests\Feature\FilamentExactTest" classname="Tests.Feature.FilamentExactTest" assertions="1" time="0.006084"/>
+      </testsuite>
+      <testsuite name="Tests\ArchTest" file="tests/ArchTest.php" tests="1" assertions="3" errors="0" failures="0" skipped="0" time="0.150474">
+        <testcase name="it will not use debugging functions" file="tests/ArchTest.php::it will not use debugging functions" class="Tests\ArchTest" classname="Tests.ArchTest" assertions="3" time="0.150474"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
