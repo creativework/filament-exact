@@ -3,7 +3,7 @@
 // Ensure package configuration is loaded
 use CreativeWork\FilamentExact\FilamentExactServiceProvider;
 
-it('loads the package configuration', function() {
+it('loads the package configuration', function () {
     expect(config('filament-exact'))->toBeArray();
 });
 
