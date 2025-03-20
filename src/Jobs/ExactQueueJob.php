@@ -7,7 +7,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Queue\SerializesModels;
-use Picqer\Financials\Exact\Connection;
 
 abstract class ExactQueueJob implements ShouldQueue
 {
