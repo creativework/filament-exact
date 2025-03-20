@@ -33,6 +33,13 @@ class RegisterExactWebhookCommand extends Command
                 $webhookSub->save();
                 $this->info("Webhook geregistreerd: {$webhook->topic} -> {$webhook->slug}");
             } catch (Exception $e) {
+
+                // Ignore if message contains 'Gegeven bestaat reeds'
+                if (strpos($e->getMessage(), 'Gegeven bestaat reeds') !== false) {
+                    $this->info("Webhook bestaat reeds: {$webhook->topic} -> {$webhook->slug}");
+                    continue;
+                }
+
                 Log::error('Error registering Exact Online Webooks', [
                     'error' => $e->getMessage(),
                     'topic' => $webhook->topic,

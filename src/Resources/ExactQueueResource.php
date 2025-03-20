@@ -103,6 +103,8 @@ class ExactQueueResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->poll('5s')
+            ->deferLoading()
             ->recordUrl(fn ($record) => static::getUrl('view', ['record' => $record]))
             ->defaultSort('created_at', 'desc')
             ->paginated(50, 100, 'all')
