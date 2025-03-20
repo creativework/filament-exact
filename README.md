@@ -116,7 +116,7 @@ After publishing the configuration file, you can find it in `config/filament-exa
 return [
     'model' => ExactQueue::class,
     'resource' => ExactQueueResource::class,
-    
+
     'database' => [
         'tables' => [
             'queue' => 'exact_queue',
@@ -197,7 +197,7 @@ class ImportProductsJob extends ExactQueueJob
     public function handle(ExactService $service): void
     {
         $connection = $service->getConnection();
-        
+
         $itemWrapper = new Item($connection);
         $item = $itemWrapper->find($this->id);
         if (! $item) {
@@ -333,8 +333,6 @@ You may need to authorize the application again. You can do this from the Filame
 ```bash
 composer test
 ```
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## 🔄 Changelog
 
