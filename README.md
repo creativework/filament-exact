@@ -305,7 +305,7 @@ You can filter the queue by status quickly find the job you are looking for. If 
 From within this view you can see the progress of the job, the status, and any errors that occurred.
 You can also retry the job or delete it from the queue. If you wish to put the job on top of the queue, you can raise the priority of the job.
 
-![Queue Job Details](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact-detail.png)
+![Queue Job Details](https://raw.githubusercontent.com/creativework/filament-exact/master/docs/filament-exact-detail.png)
 
 ---
 
@@ -325,7 +325,7 @@ tail -f storage/logs/laravel.log
 ### 3. Getting 401 Unauthorized Errors?
 You may need to authorize the application again. You can do this from the Filament panel by clicking on the "Authorize" button in the ExactOnline Resource.
 
-![Authorize Exact](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact-authorize-button.png)
+![Authorize Exact](https://raw.githubusercontent.com/creativework/filament-exact/master/docs/filament-exact-authorize-button.png)
 
 ---
 
