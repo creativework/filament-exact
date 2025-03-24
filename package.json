@@ -6,6 +6,6 @@
         "build": "npm-run-all build:*"
     },
     "devDependencies": {
-        "esbuild": "^0.19.2"
+        "esbuild": "^0.25.0"
     }
 }
