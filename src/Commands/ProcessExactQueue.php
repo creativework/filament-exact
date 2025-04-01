@@ -28,7 +28,14 @@ class ProcessExactQueue extends Command
             return;
         }
 
-        if (ExactToken::firstOrNew()->isLocked()) {
+        $token = ExactToken::firstOrNew();
+        if ($token->isLocked()) {
+            Log::info('ExactQueue is locked, skipping processing', ['queue' => $queue->id]);
+            return;
+        }
+
+        if (!$token->isAuthorized()) {
+            Log::info('ExactQueue is not authorized, skipping processing', ['queue' => $queue->id]);
             return;
         }
 
@@ -60,6 +67,14 @@ class ProcessExactQueue extends Command
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
             $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
             ExactToken::firstOrNew()->unlock();
+
+            if (str_contains($e->getMessage(), '401')) {
+                $token->auth_token = null;
+                $token->refresh_token = null;
+                $token->save();
+
+                Log::info('ExactQueue token deleted due to 401 error', ['queue' => $queue->id]);
+            }
 
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {

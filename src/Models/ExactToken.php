@@ -24,4 +24,9 @@ class ExactToken extends Model
     {
         return $this->locked;
     }
+
+    public function isAuthorized(): bool
+    {
+        return $this->access_token !== null && $this->refresh_token !== null;
+    }
 }

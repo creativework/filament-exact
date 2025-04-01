@@ -1,6 +1,7 @@
 {
     "Exact": "Exact",
     "Jobs": "Taken",
+    "jobs": "taken",
     "Job": "Taak",
     "Queue": "Wachtrij",
     "Pending": "In afwachting",

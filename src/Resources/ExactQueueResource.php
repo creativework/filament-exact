@@ -59,7 +59,7 @@ class ExactQueueResource extends Resource
 
     public static function getPluralModelLabel(): string
     {
-        return __('Jobs');
+        return __('jobs');
     }
 
     public static function form(Form $form): Form
