@@ -145,6 +145,7 @@ return [
 
     'navigation' => [
         'group' => null,
+        'sort' => -1,
     ],
 ];
 ```
@@ -157,6 +158,7 @@ return [
 - **notifications.mail.to**: The email addresses to send notifications to. (e.g ["errors@creativework.nl", "jesse@creativework.nl"])
 - **exact**: Configuration for the ExactOnline API.
 - **navigation.group**: The group to add the ExactOnline plugin to in the Filament panel.
+- **navigation.sort**: The sort order of the ExactOnline plugin in the Filament panel.
 
 ---
 

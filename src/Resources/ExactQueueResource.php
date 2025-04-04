@@ -32,6 +32,11 @@ class ExactQueueResource extends Resource
         return config('filament-exact.navigation.group', __('Exact'));
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return config('filament-exact.navigation.sort', -1);
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('Exact') . ' ' . __('Queue');

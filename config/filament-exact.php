@@ -34,5 +34,6 @@ return [
 
     'navigation' => [
         'group' => null,
+        'sort' => -1,
     ],
 ];
