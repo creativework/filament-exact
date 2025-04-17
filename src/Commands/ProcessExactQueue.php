@@ -69,7 +69,7 @@ class ProcessExactQueue extends Command
             ExactToken::firstOrNew()->unlock();
 
             if (str_contains($e->getMessage(), '401')) {
-                $token->auth_token = null;
+                $token->access_token = null;
                 $token->refresh_token = null;
                 $token->save();
 
