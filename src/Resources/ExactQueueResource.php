@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class ExactQueueResource extends Resource
 {
@@ -111,7 +112,7 @@ class ExactQueueResource extends Resource
             ->poll('5s')
             ->deferLoading()
             ->recordUrl(fn ($record) => static::getUrl('view', ['record' => $record]))
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort(fn (Builder $query): Builder => $query->orderBy('priority', 'desc')->orderBy('id', 'asc'))
             ->paginated(50, 100, 'all')
             ->columns([
                 TextColumn::make('status')

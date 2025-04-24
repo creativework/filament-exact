@@ -19,9 +19,11 @@ class ProcessExactQueue extends Command
 
     public function handle(ExactService $exactService): void
     {
+
+        // Get pending queue item. First get the highest priority, otherwise get the lowest number.
         $queue = ExactQueue::where('status', QueueStatusEnum::PENDING)
-            ->orderBy('priority', 'asc')
-            ->orderBy('created_at', 'asc')
+            ->orderBy('priority', 'desc')
+            ->orderBy('id', 'asc')
             ->first();
 
         if (! $queue) {
