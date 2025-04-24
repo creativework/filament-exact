@@ -3,7 +3,11 @@
 namespace CreativeWork\FilamentExact\Services;
 
 use CreativeWork\FilamentExact\Models\ExactToken;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Log;
 use Picqer\Financials\Exact\Connection;
+use Psr\Http\Message\StreamInterface;
 
 class ExactService
 {
@@ -107,5 +111,25 @@ class ExactService
     {
         $this->token->{$key} = $code;
         $this->token->save();
+    }
+
+    public function download(string $url): ?StreamInterface
+    {
+        try {
+            $client = new Client();
+            $res = $client->get($url, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Prefer'        => 'return=representation',
+                    'Authorization' => 'Bearer ' . $this->connection->getAccessToken(),
+                ],
+            ]);
+
+            return $res->getBody();
+        } catch (RequestException $e) {
+            Log::warning("Failed to download item image: {$e->getMessage()}");
+            return null;
+        }
     }
 }
