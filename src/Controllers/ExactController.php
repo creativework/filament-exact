@@ -2,10 +2,10 @@
 
 namespace CreativeWork\FilamentExact\Controllers;
 
-use App\Http\Controllers\Controller;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource;
 use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ExactController extends Controller
 {

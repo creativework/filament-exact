@@ -12,7 +12,6 @@ return [
             'tokens' => 'exact_tokens',
         ],
         'pruning' => [
-            'enabled' => true,
             'after' => 30, // days
         ],
     ],

@@ -8,8 +8,8 @@ use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use CreativeWork\FilamentExact\Services\ExactService;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Log;
 
 class RegisterExactWebhookCommand extends Command
 {

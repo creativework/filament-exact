@@ -5,14 +5,12 @@ namespace CreativeWork\FilamentExact\Models;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
 class ExactQueue extends Model
 {
-    use HasFactory;
     use MassPrunable;
 
     protected $fillable = [

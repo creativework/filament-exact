@@ -2,13 +2,13 @@
 
 namespace CreativeWork\FilamentExact\Controllers;
 
-use App\Http\Controllers\Controller;
 use CreativeWork\FilamentExact\FilamentExactPlugin;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Log;
 
 class ExactWebhookController extends Controller
 {

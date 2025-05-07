@@ -8,8 +8,8 @@ use CreativeWork\FilamentExact\Models\ExactQueue;
 use CreativeWork\FilamentExact\Models\ExactToken;
 use CreativeWork\FilamentExact\Services\ExactService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Log;
 
 class ProcessExactQueue extends Command
 {
@@ -64,14 +64,6 @@ class ProcessExactQueue extends Command
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
             $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
             $token->unlock();
-
-            if (str_contains($e->getMessage(), '401')) {
-                $token->access_token = null;
-                $token->refresh_token = null;
-                $token->save();
-
-                Log::info('ExactQueue token deleted due to 401 error', ['queue' => $queue->id]);
-            }
 
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {

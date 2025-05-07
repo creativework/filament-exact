@@ -78,7 +78,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
         if (app()->environment('production')) {
             $schedule->command('exact:process-queue')->everyMinute();
-            $schedule->command('exact:prune')->daily();
         }
     })
     ->create();
@@ -111,7 +110,6 @@ return [
             'tokens' => 'exact_tokens',
         ],
         'pruning' => [
-            'enabled' => true,
             'after' => 30, // days
         ],
     ],
