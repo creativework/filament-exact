@@ -2,6 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Commands;
 
+use CreativeWork\FilamentExact\Endpoints\WebhookSubscription;
 use CreativeWork\FilamentExact\FilamentExactPlugin;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use CreativeWork\FilamentExact\Services\ExactService;
@@ -9,7 +10,6 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Log;
-use Picqer\Financials\Exact\WebhookSubscription;
 
 class RegisterExactWebhookCommand extends Command
 {

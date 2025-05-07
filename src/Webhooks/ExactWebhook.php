@@ -2,7 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Webhooks;
 
-use Picqer\Financials\Exact\Webhook\Authenticatable;
+use CreativeWork\FilamentExact\Traits\Authenticatable;
 
 abstract class ExactWebhook
 {

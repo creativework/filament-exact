@@ -26,10 +26,7 @@ We are specialized in creating websites and web applications focused on automati
 - 🚀 **Realtime overview** of the queue status.
 - 🔐 **Integration with Spatie Laravel Permission** to manage access to the ExactOnline plugin.
 
-### Exact PHP Client
-This package is making use of the [Picqer Exact PHP Client](https://github.com/picqer/exact-php-client) to interact with the ExactOnline API. You need to have an ExactOnline account and an API key to use this package.
-
-![Filament Exact](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact.png)
+![Filament Exact](https://raw.githubusercontent.com/creativework/filament-exact/master/docs/filament-exact.png)
 
 ---
 
@@ -52,7 +49,7 @@ EXACT_ONLINE_CLIENT_SECRET=""
 EXACT_ONLINE_CLIENT_WEBHOOK_SECRET=""
 EXACT_ONLINE_REDIRECT_URI=""
 EXACT_ONLINE_WEBHOOK_URI=""
-EXACT_ONLINE_CLIENT_DIVISION=""
+EXACT_ONLINE_DIVISION=""
 ```
 
 ### 4. Add the plugin to your `PanelProvider`
@@ -99,7 +96,7 @@ return Application::configure(basePath: dirname(__DIR__))
 ### 6. Authorize the application
 Navigate to the Filament panel and click on the "Authorize" button in the ExactOnline Resource.
 You will be redirected to the ExactOnline login page to authorize the application.
-![Authorize Exact](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact-authorize-button.png)
+![Authorize Exact](https://raw.githubusercontent.com/creativework/filament-exact/master/docs/filament-exact-authorize-button.png)
 
 ---
 
@@ -183,7 +180,7 @@ use CreativeWork\FilamentExact\Jobs\ExactQueueJob;
 use Exception;
 use Log;
 use CreativeWork\FilamentExact\Services\ExactService;
-use Picqer\Financials\Exact\Item;
+use CreativeWork\FilamentExact\Endpoints\Item;
 use App\Models\Product;
 
 class ImportProductsJob extends ExactQueueJob
@@ -301,7 +298,7 @@ If you would like to contribute translations for other languages, feel free to s
 ### Queue Overview
 The queue overview provides a list of all jobs in the queue, including their status, priority, and progress.
 You can filter the queue by status quickly find the job you are looking for. If you want to see more details about a job, you can click on the job to view the details.
-![Queue Overview](https://raw.githubusercontent.com/Jessedev1/filament-exact/master/docs/filament-exact-overview.png)
+![Queue Overview](https://raw.githubusercontent.com/creativework/filament-exact/master/docs/filament-exact-overview.png)
 
 ### Queue Job Details
 From within this view you can see the progress of the job, the status, and any errors that occurred.

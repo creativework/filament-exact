@@ -19,7 +19,6 @@ class ProcessExactQueue extends Command
 
     public function handle(ExactService $exactService): void
     {
-
         // Get pending queue item. First get the highest priority, otherwise get the lowest number.
         $queue = ExactQueue::where('status', QueueStatusEnum::PENDING)
             ->orderBy('priority', 'desc')
@@ -30,7 +29,7 @@ class ProcessExactQueue extends Command
             return;
         }
 
-        $token = ExactToken::firstOrNew();
+        $token = ExactToken::firstOrNew([]);
         if ($token->isLocked()) {
             Log::info('ExactQueue is locked, skipping processing', ['queue' => $queue->id]);
             return;
@@ -43,9 +42,7 @@ class ProcessExactQueue extends Command
 
         try {
             $queue->update(['status' => QueueStatusEnum::PROCESSING]);
-
-            // Lock queue
-            ExactToken::firstOrNew()->lock();
+            $token->lock();
 
             $jobClass = $queue->job;
             $parameters = $queue->parameters ?? [];
@@ -61,14 +58,12 @@ class ProcessExactQueue extends Command
 
             // Update queue status
             $queue->update(['status' => QueueStatusEnum::COMPLETED]);
-
-            // Unlock queue
-            ExactToken::firstOrNew()->unlock();
+            $token->unlock();
 
         } catch (\Exception $e) {
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
             $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
-            ExactToken::firstOrNew()->unlock();
+            $token->unlock();
 
             if (str_contains($e->getMessage(), '401')) {
                 $token->access_token = null;

@@ -6,7 +6,6 @@ use CreativeWork\FilamentExact\Models\ExactToken;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Log;
-use Picqer\Financials\Exact\Connection;
 use Psr\Http\Message\StreamInterface;
 
 class ExactService
