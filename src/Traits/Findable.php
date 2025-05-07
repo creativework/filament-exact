@@ -114,7 +114,6 @@ trait Findable
         }
 
         $result = $this->connection()->get($this->url(), $request, $headers);
-
         if (! empty($divisionId)) {
             $this->connection()->setDivision($originalDivision); // Restore division
         }
@@ -193,5 +192,29 @@ trait Findable
                 yield new static($this->connection(), $row);
             }
         }
+    }
+
+    public function paginated(int $page = 1, int $perPage = 100, string $filter = '', string $select = '', string $expand = ''): array
+    {
+        $params = [
+            '$top'  => $perPage,
+            '$skip' => ($page - 1) * $perPage,
+        ];
+
+        if ($filter) {
+            $params['$filter'] = $filter;
+        }
+
+        if ($select) {
+            $params['$select'] = $select;
+        }
+
+        if ($expand) {
+            $params['$expand'] = $expand;
+        }
+
+        $results = $this->connection()->get($this->url(), $params);
+
+        return $this->collectionFromResult($results);
     }
 }

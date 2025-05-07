@@ -121,4 +121,9 @@ class Item extends Model
     ];
 
     protected $url = 'logistics/Items';
+
+    public function getDownloadUrl(): string
+    {
+        return $this->PictureUrl;
+    }
 }
