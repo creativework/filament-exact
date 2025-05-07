@@ -1,13 +1,4 @@
 # Filament Exact - ExactOnline Integration for FilamentPHP
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/creativework/filament-exact.svg?style=flat-square)](https://packagist.org/packages/creativework/filament-exact)
-[![Total Downloads](https://img.shields.io/packagist/dt/creativework/filament-exact.svg?style=flat-square)](https://packagist.org/packages/creativework/filament-exact)
-
-## This package is made by [Creative Work](https://creativework.nl)
-
-Hi! We are Creative Work. A company from Buitenpost in the Nederlands.
-We are specialized in creating websites and web applications focused on automation for our customers.
-
 ---
 
 ## About the package
