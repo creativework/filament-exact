@@ -1,0 +1,81 @@
+<?php
+
+namespace CreativeWork\FilamentExact\Endpoints;
+
+use CreativeWork\FilamentExact\Traits\Findable;
+
+class Employee extends Model
+{
+    use Findable;
+
+    protected $fillable = [
+        'ID',
+        'AddressLine2',
+        'AddressLine3',
+        'AddressStreet',
+        'AddressStreetNumber',
+        'AddressStreetNumberSuffix',
+        'BirthDate',
+        'BirthName',
+        'BirthNamePrefix',
+        'BirthPlace',
+        'BusinessEmail',
+        'BusinessFax',
+        'BusinessMobile',
+        'BusinessPhone',
+        'BusinessPhoneExtension',
+        'City',
+        'Code',
+        'Country',
+        'Created',
+        'Creator',
+        'CreatorFullName',
+        'Customer',
+        'CustomField',
+        'Division',
+        'Email',
+        'EmployeeHID',
+        'EndDate',
+        'FirstName',
+        'FullName',
+        'Gender',
+        'HID',
+        'Initials',
+        'IsActive',
+        'IsAnonymised',
+        'Language',
+        'LastName',
+        'LocationDescription',
+        'Manager',
+        'MaritalDate',
+        'MaritalStatus',
+        'MiddleName',
+        'Mobile',
+        'Modified',
+        'Modifier',
+        'ModifierFullName',
+        'NameComposition',
+        'Nationality',
+        'NickName',
+        'Notes',
+        'PartnerName',
+        'PartnerNamePrefix',
+        'Person',
+        'Phone',
+        'PhoneExtension',
+        'Picture',
+        'PictureFileName',
+        'PictureThumbnailUrl',
+        'PictureUrl',
+        'Postcode',
+        'PrivateEmail',
+        'SocialSecurityNumber',
+        'StartDate',
+        'State',
+        'Title',
+        'User',
+        'UserFullName',
+    ];
+
+    protected $url = 'payroll/Employees';
+}
