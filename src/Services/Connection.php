@@ -5,6 +5,7 @@ namespace CreativeWork\FilamentExact\Services;
 use CreativeWork\FilamentExact\Endpoints\Me;
 use CreativeWork\FilamentExact\Endpoints\SystemUser;
 use CreativeWork\FilamentExact\Exceptions\ApiException;
+use CreativeWork\FilamentExact\Models\ExactToken;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
@@ -32,26 +33,6 @@ class Connection
      * @var mixed
      */
     private $exactClientSecret;
-
-    /**
-     * @var mixed
-     */
-    private $authorizationCode;
-
-    /**
-     * @var mixed
-     */
-    private $accessToken;
-
-    /**
-     * @var int the Unix timestamp at which the access token expires
-     */
-    private int $tokenExpires;
-
-    /**
-     * @var mixed
-     */
-    private $refreshToken;
 
     /**
      * @var mixed
@@ -171,7 +152,7 @@ class Connection
     public function checkOrAcquireAccessToken(): void
     {
         // If access token is not set or token has expired, acquire new token
-        if (empty($this->accessToken) || $this->tokenHasExpired()) {
+        if (empty($this->getAccessToken()) || $this->tokenHasExpired()) {
             $this->acquireAccessToken();
         }
     }
@@ -199,8 +180,9 @@ class Connection
         $this->checkOrAcquireAccessToken();
 
         // If we have a token, sign the request
-        if (! $this->needsAuthentication() && ! empty($this->accessToken)) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        $accessToken = $this->getAccessToken();
+        if (! $this->needsAuthentication() && ! empty($accessToken)) {
+            $headers['Authorization'] = 'Bearer ' . $accessToken;
         }
 
         // Create param string
@@ -382,7 +364,9 @@ class Connection
      */
     public function setAuthorizationCode($authorizationCode)
     {
-        $this->authorizationCode = $authorizationCode;
+        $token = ExactToken::firstOrNew([]);
+        $token->authorization_code = $authorizationCode;
+        $token->save();
     }
 
     /**
@@ -390,7 +374,9 @@ class Connection
      */
     public function setAccessToken($accessToken)
     {
-        $this->accessToken = $accessToken;
+        $token = ExactToken::firstOrNew([]);
+        $token->access_token = $accessToken;
+        $token->save();
     }
 
     /**
@@ -398,7 +384,9 @@ class Connection
      */
     public function setRefreshToken($refreshToken)
     {
-        $this->refreshToken = $refreshToken;
+        $token = ExactToken::firstOrNew([]);
+        $token->refresh_token = $refreshToken;
+        $token->save();
     }
 
     public function redirectForAuthorization(): void
@@ -433,7 +421,12 @@ class Connection
 
     public function needsAuthentication(): bool
     {
-        return empty($this->refreshToken) && empty($this->authorizationCode);
+        $token = ExactToken::firstOrNew([]);
+        if (!$token) {
+            return true;
+        }
+
+        return empty($token->refresh_token) && empty($token->authorization_code);
     }
 
     /**
@@ -551,7 +544,12 @@ class Connection
      */
     public function getRefreshToken()
     {
-        return $this->refreshToken;
+        $token = ExactToken::firstOrNew([]);
+        if ($token && $token->refresh_token) {
+            return $token->refresh_token;
+        }
+
+        return null;
     }
 
     /**
@@ -559,7 +557,25 @@ class Connection
      */
     public function getAccessToken()
     {
-        return $this->accessToken;
+        $token = ExactToken::firstOrNew([]);
+        if ($token && $token->access_token) {
+            return $token->access_token;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorizationCode()
+    {
+        $token = ExactToken::firstOrNew([]);
+        if ($token && $token->authorization_code) {
+            return $token->authorization_code;
+        }
+
+        return null;
     }
 
     private function acquireAccessToken(): void
@@ -578,20 +594,20 @@ class Connection
             }
 
             // If refresh token not yet acquired, do token request
-            if (empty($this->refreshToken)) {
+            if (empty($this->getRefreshToken())) {
                 $body = [
                     'form_params' => [
                         'redirect_uri'  => $this->redirectUrl,
                         'grant_type'    => 'authorization_code',
                         'client_id'     => $this->exactClientId,
                         'client_secret' => $this->exactClientSecret,
-                        'code'          => $this->authorizationCode,
+                        'code'          => $this->getAuthorizationCode(),
                     ],
                 ];
             } else { // else do refresh token request
                 $body = [
                     'form_params' => [
-                        'refresh_token' => $this->refreshToken,
+                        'refresh_token' => $this->getRefreshToken(),
                         'grant_type'    => 'refresh_token',
                         'client_id'     => $this->exactClientId,
                         'client_secret' => $this->exactClientSecret,
@@ -606,9 +622,9 @@ class Connection
             $body = json_decode($responseBody, true);
 
             if (json_last_error() === JSON_ERROR_NONE) {
-                $this->accessToken = $body['access_token'];
-                $this->refreshToken = $body['refresh_token'];
-                $this->tokenExpires = $this->getTimestampFromExpiresIn($body['expires_in']);
+                $this->setAccessToken($body['access_token']);
+                $this->setRefreshToken($body['refresh_token']);
+                $this->setTokenExpires($this->getTimestampFromExpiresIn($body['expires_in']));
 
                 if (is_callable($this->tokenUpdateCallback)) {
                     call_user_func($this->tokenUpdateCallback, $this);
@@ -641,7 +657,12 @@ class Connection
 
     public function getTokenExpires(): int
     {
-        return $this->tokenExpires;
+        $token = ExactToken::firstOrNew([]);
+        if ($token && $token->expires_in) {
+            return $token->expires_in;
+        }
+
+        return 0;
     }
 
     /**
@@ -649,16 +670,19 @@ class Connection
      */
     public function setTokenExpires($tokenExpires)
     {
-        $this->tokenExpires = $tokenExpires;
+        $token = ExactToken::firstOrNew([]);
+        $token->expires_in = $tokenExpires;
+        $token->save();
     }
 
     private function tokenHasExpired(): bool
     {
-        if (empty($this->tokenExpires)) {
-            return true;
+        $token = ExactToken::firstOrNew([]);
+        if ($token && $token->expires_in) {
+            return (($token->expires_in - 10) < time());
         }
 
-        return ($this->tokenExpires - 10) < time();
+        return true;
     }
 
     private function formatUrl($endPoint, $includeDivision = true, $formatNextUrl = false)
