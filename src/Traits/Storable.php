@@ -10,7 +10,7 @@ trait Storable
     abstract public function exists(): bool;
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      */
     abstract protected function fill(array $attributes);
 
@@ -26,9 +26,9 @@ trait Storable
     abstract public function primaryKeyContent();
 
     /**
-     * @throws ApiException
-     *
      * @return $this
+     *
+     * @throws ApiException
      */
     public function save(): self
     {
@@ -42,9 +42,9 @@ trait Storable
     }
 
     /**
-     * @throws ApiException
-     *
      * @return array|mixed
+     *
+     * @throws ApiException
      */
     public function insert()
     {
@@ -52,9 +52,9 @@ trait Storable
     }
 
     /**
-     * @throws ApiException
-     *
      * @return array|mixed
+     *
+     * @throws ApiException
      */
     public function update()
     {
@@ -64,9 +64,9 @@ trait Storable
     }
 
     /**
-     * @throws ApiException
-     *
      * @return array|mixed
+     *
+     * @throws ApiException
      */
     public function delete()
     {

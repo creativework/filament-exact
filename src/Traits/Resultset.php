@@ -19,7 +19,7 @@ class Resultset
     protected array $params;
 
     /**
-     * @param array<string, mixed> $params
+     * @param  array<string, mixed>  $params
      */
     public function __construct(Connection $connection, ?string $url, string $class, array $params)
     {

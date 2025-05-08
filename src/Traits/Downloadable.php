@@ -14,12 +14,12 @@ trait Downloadable
 
     public function download(): StreamInterface
     {
-        $client = new Client();
+        $client = new Client;
 
         $headers = [
-            'Accept'        => 'application/json',
-            'Content-Type'  => 'application/json',
-            'Prefer'        => 'return=representation',
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Prefer' => 'return=representation',
             'Authorization' => 'Bearer ' . $this->connection()->getAccessToken(),
         ];
 

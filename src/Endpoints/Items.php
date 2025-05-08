@@ -19,7 +19,7 @@ class Items
     {
         return $this->client->get('logistics/Items', [
             '$skip' => $skip,
-            '$top'  => $top,
+            '$top' => $top,
             '$filter' => $filter,
         ]);
     }
@@ -28,5 +28,4 @@ class Items
     {
         return $this->client->download($url);
     }
-
 }

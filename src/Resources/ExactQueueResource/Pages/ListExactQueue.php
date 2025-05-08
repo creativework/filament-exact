@@ -91,7 +91,7 @@ class ListExactQueue extends ListRecords
                         return;
                     }
 
-                    $service = new ExactTokenService();
+                    $service = new ExactTokenService;
                     redirect()->away($service->getAuthUrl());
                 }),
         ];

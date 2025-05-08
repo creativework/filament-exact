@@ -14,9 +14,6 @@ trait Findable
 
     abstract protected function isFillable($key);
 
-    /**
-     * @return string
-     */
     abstract public function url(): string;
 
     abstract public function primaryKey(): string;
@@ -31,7 +28,7 @@ trait Findable
 
         $records = $this->connection()->get($this->url(), [
             '$filter' => $filter,
-            '$top'    => 1, // The result will always be 1 but on some entities Exact gives an error without it.
+            '$top' => 1, // The result will always be 1 but on some entities Exact gives an error without it.
         ]);
 
         $result = isset($records[0]) ? $records[0] : [];
@@ -41,7 +38,7 @@ trait Findable
 
     public function findWithSelect($id, $select = '')
     {
-        //eg: $oAccounts->findWithSelect('5b7f4515-b7a0-4839-ac69-574968677d96', 'Code, Name');
+        // eg: $oAccounts->findWithSelect('5b7f4515-b7a0-4839-ac69-574968677d96', 'Code, Name');
         $result = $this->connection()->get($this->url(), [
             '$filter' => $this->primaryKey() . " eq guid'$id'",
             '$select' => $select,
@@ -53,9 +50,8 @@ trait Findable
     /**
      * Return the value of the primary key.
      *
-     * @param string|int $code the value to search for
-     * @param string $key  the key being searched (defaults to 'Code')
-     *
+     * @param  string|int  $code  the value to search for
+     * @param  string  $key  the key being searched (defaults to 'Code')
      * @return string|void (guid)
      */
     public function findId($code, $key = 'Code')
@@ -70,9 +66,9 @@ trait Findable
 
             $filter = sprintf("$key eq $format", $code);
             $request = [
-                '$filter'  => $filter,
-                '$top'     => 1,
-                '$select'  => $this->primaryKey(),
+                '$filter' => $filter,
+                '$top' => 1,
+                '$select' => $this->primaryKey(),
                 '$orderby' => $this->primaryKey(),
             ];
             if ($records = $this->connection()->get($this->url(), $request)) {
@@ -129,7 +125,7 @@ trait Findable
     public function first($filter = '', $expand = '', $select = '', $system_query_options = null, array $headers = [])
     {
         $query_options = [
-            '$top'=> 1,
+            '$top' => 1,
         ];
 
         if (is_array($system_query_options)) {
@@ -197,7 +193,7 @@ trait Findable
     public function paginated(int $page = 1, int $perPage = 100, string $filter = '', string $select = '', string $expand = ''): array
     {
         $params = [
-            '$top'  => $perPage,
+            '$top' => $perPage,
             '$skip' => ($page - 1) * $perPage,
         ];
 

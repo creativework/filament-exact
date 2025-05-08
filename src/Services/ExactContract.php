@@ -2,7 +2,4 @@
 
 namespace CreativeWork\FilamentExact\Services;
 
-interface ExactContract
-{
-
-}
+interface ExactContract {}

@@ -32,17 +32,19 @@ class ProcessExactQueue extends Command
         $token = ExactToken::firstOrNew([]);
         if ($token->isLocked()) {
             Log::info('ExactQueue is locked, skipping processing', ['queue' => $queue->id]);
+
             return;
         }
 
-        if (!$token->isAuthorized()) {
+        if (! $token->isAuthorized()) {
             Log::info('ExactQueue is not authorized, skipping processing', ['queue' => $queue->id]);
+
             return;
         }
 
         try {
-//            $queue->update(['status' => QueueStatusEnum::PROCESSING]);
-//            $token->lock();
+            //            $queue->update(['status' => QueueStatusEnum::PROCESSING]);
+            //            $token->lock();
 
             $jobClass = $queue->job;
             $parameters = $queue->parameters ?? [];
@@ -54,13 +56,13 @@ class ProcessExactQueue extends Command
             $job->handle($exactService);
 
             // Update queue status
-//            $queue->update(['status' => QueueStatusEnum::COMPLETED]);
-//            $token->unlock();
+            //            $queue->update(['status' => QueueStatusEnum::COMPLETED]);
+            //            $token->unlock();
 
         } catch (\Exception $e) {
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
-//            $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
-//            $token->unlock();
+            //            $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
+            //            $token->unlock();
 
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {

@@ -2,7 +2,6 @@
 
 namespace CreativeWork\FilamentExact\Commands;
 
-use CreativeWork\FilamentExact\Endpoints\WebhookSubscription;
 use CreativeWork\FilamentExact\FilamentExactPlugin;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use CreativeWork\FilamentExact\Services\ExactService;

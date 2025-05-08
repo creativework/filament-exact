@@ -7,8 +7,8 @@ use CreativeWork\FilamentExact\Exceptions\ApiException;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Psr7;
+use Psr\Http\Message\ResponseInterface;
 
 class ExactClient implements HttpClientInterface
 {
@@ -32,10 +32,11 @@ class ExactClient implements HttpClientInterface
 
     protected ?int $minutelyLimitReset = null;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->client = new Client([
             'http_errors' => true,
-            'expect'      => false,
+            'expect' => false,
         ]);
     }
 
@@ -67,7 +68,7 @@ class ExactClient implements HttpClientInterface
     public function download(string $url)
     {
         try {
-            $client = new Client();
+            $client = new Client;
             $res = $client->get($url, [
                 'headers' => $this->headers(),
             ]);
@@ -91,6 +92,7 @@ class ExactClient implements HttpClientInterface
         }
 
         $url = $this->formatUrl($endpoint);
+
         try {
             $response = $this->client->request($method, $url, array_merge($headers, [
                 'headers' => $headers,
@@ -104,12 +106,13 @@ class ExactClient implements HttpClientInterface
 
     private function headers(): array
     {
-        $tokenService = new ExactTokenService();
+        $tokenService = new ExactTokenService;
+
         return [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
             'Prefer' => 'return=representation',
-            'Authorization' => 'Bearer '. $tokenService->getAccessToken(),
+            'Authorization' => 'Bearer ' . $tokenService->getAccessToken(),
         ];
     }
 
@@ -151,7 +154,7 @@ class ExactClient implements HttpClientInterface
     {
         $divison = config('filament-exact.exact.division');
         if ($divison) {
-            return implode('/', [$this->getApiUrl(), config('filament-exact.exact.division'), $endPoint,]);
+            return implode('/', [$this->getApiUrl(), config('filament-exact.exact.division'), $endPoint]);
         }
 
         return implode('/', [$this->getApiUrl(), $endPoint]);
@@ -174,7 +177,7 @@ class ExactClient implements HttpClientInterface
             Psr7\Message::rewindBody($response);
             $responseBody = $response->getBody()->getContents();
             $json = json_decode($responseBody, true);
-            if (false === is_array($json)) {
+            if (is_array($json) === false) {
                 throw new ApiException('Json decode failed. Got response: ' . $responseBody);
             }
             if (array_key_exists('d', $json)) {

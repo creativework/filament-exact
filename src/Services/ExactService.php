@@ -9,7 +9,6 @@ use CreativeWork\FilamentExact\Endpoints\Webhooks;
 
 class ExactService implements ExactContract
 {
-
     public function __construct(
         protected HttpClientInterface $client,
         protected ExactTokenService $tokenService,
