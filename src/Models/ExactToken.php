@@ -10,6 +10,13 @@ class ExactToken extends Model
         'locked',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'expires_in' => 'datetime',
+        ];
+    }
+
     public function lock(): void
     {
         $this->update(['locked' => true]);
@@ -28,5 +35,14 @@ class ExactToken extends Model
     public function isAuthorized(): bool
     {
         return $this->access_token !== null && $this->refresh_token !== null;
+    }
+
+    public function isAlmostExpired(): bool
+    {
+        if (! $this->expires_in) {
+            return false;
+        }
+
+        return $this->expires_in->isBefore(now());
     }
 }

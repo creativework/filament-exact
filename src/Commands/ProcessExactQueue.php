@@ -41,8 +41,8 @@ class ProcessExactQueue extends Command
         }
 
         try {
-            $queue->update(['status' => QueueStatusEnum::PROCESSING]);
-            $token->lock();
+//            $queue->update(['status' => QueueStatusEnum::PROCESSING]);
+//            $token->lock();
 
             $jobClass = $queue->job;
             $parameters = $queue->parameters ?? [];
@@ -50,20 +50,17 @@ class ProcessExactQueue extends Command
             // Instantiate the job; assuming parameters are passed as an associative array
             $job = new $jobClass(...array_values($parameters));
 
-            // Connect service to Exact Online
-            $exactService->connect();
-
             // Execute the job's handle method with the connection
             $job->handle($exactService);
 
             // Update queue status
-            $queue->update(['status' => QueueStatusEnum::COMPLETED]);
-            $token->unlock();
+//            $queue->update(['status' => QueueStatusEnum::COMPLETED]);
+//            $token->unlock();
 
         } catch (\Exception $e) {
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
-            $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
-            $token->unlock();
+//            $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
+//            $token->unlock();
 
             $recipients = config('filament-exact.notifications.mail.to');
             if ($recipients) {

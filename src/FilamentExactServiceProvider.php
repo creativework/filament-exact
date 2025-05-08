@@ -4,6 +4,8 @@ namespace CreativeWork\FilamentExact;
 
 use CreativeWork\FilamentExact\Commands\ProcessExactQueue;
 use CreativeWork\FilamentExact\Commands\RegisterExactWebhookCommand;
+use CreativeWork\FilamentExact\Contracts\HttpClientInterface;
+use CreativeWork\FilamentExact\Services\ExactClient;
 use CreativeWork\FilamentExact\Testing\TestsFilamentExact;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
@@ -62,7 +64,9 @@ class FilamentExactServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function packageRegistered(): void {
+        $this->app->bind(HttpClientInterface::class, ExactClient::class);
+    }
 
     public function packageBooted(): void
     {

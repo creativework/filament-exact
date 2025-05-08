@@ -17,25 +17,19 @@ class RegisterExactWebhookCommand extends Command
 
     protected $description = 'Registreer alle Exact Online webhooks';
 
-    public function handle(ExactService $exactService): void
+    public function handle(ExactService $exact): void
     {
-        $connection = $exactService->connect();
-
         $plugin = FilamentExactPlugin::get();
         $webhooks = $plugin->getWebhooks();
 
         foreach ($webhooks as $webhook) {
-            $webhookSub = new WebhookSubscription($connection);
-            $webhookSub->Topic = $webhook->topic;
-            $webhookSub->CallbackURL = route('exact.webhooks.handle', ['slug' => $webhook->slug]);
-
             try {
-                $webhookSub->save();
+                $exact->webhooks()->subscribe($webhook->topic, route('exact.webhooks.handle', ['slug' => $webhook->slug]));
                 $this->info("Webhook geregistreerd: {$webhook->topic} -> {$webhook->slug}");
             } catch (Exception $e) {
 
                 // Ignore if message contains 'Gegeven bestaat reeds'
-                if (strpos($e->getMessage(), 'Gegeven bestaat reeds') !== false) {
+                if (str_contains($e->getMessage(), 'Gegeven bestaat reeds')) {
                     $this->info("Webhook bestaat reeds: {$webhook->topic} -> {$webhook->slug}");
 
                     continue;

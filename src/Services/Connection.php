@@ -233,7 +233,7 @@ class Connection
 
             return $this->parseResponse($response, $url != $this->nextUrl);
         } catch (Exception $e) {
-            $this->parseExceptionForErrorMessages($e);
+                                        $this->parseExceptionForErrorMessages($e);
         }
     }
 

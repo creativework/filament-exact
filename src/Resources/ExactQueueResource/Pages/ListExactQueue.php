@@ -4,7 +4,7 @@ namespace CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages;
 
 use CreativeWork\FilamentExact\Models\ExactToken;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource;
-use CreativeWork\FilamentExact\Services\ExactService;
+use CreativeWork\FilamentExact\Services\ExactTokenService;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Components\Tab;
@@ -91,7 +91,7 @@ class ListExactQueue extends ListRecords
                         return;
                     }
 
-                    $service = new ExactService;
+                    $service = new ExactTokenService();
                     redirect()->away($service->getAuthUrl());
                 }),
         ];
