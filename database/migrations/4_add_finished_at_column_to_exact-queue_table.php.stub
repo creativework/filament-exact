@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table(config('filament-exact.database.tables.tokens'), function (Blueprint $table) {
+        Schema::table(config('filament-exact.database.tables.queue'), function (Blueprint $table) {
             $table->datetime('finished_at')->nullable()->after('updated_at');
         });
     }
