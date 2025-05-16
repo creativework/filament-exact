@@ -10,6 +10,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
@@ -103,11 +104,11 @@ class ExactQueueResource extends Resource
                             ->label(__('Response'))
                             ->columnSpan(2)
                             ->disabled(),
-                        TextInput::make('created_at')
+                        DateTimePicker::make('created_at')
                             ->label(__('Created at'))
                             ->columnSpan(1)
                             ->disabled(),
-                        TextInput::make('finished_at')
+                        DateTimePicker::make('finished_at')
                             ->label(__('Finished at'))
                             ->columnSpan(1)
                             ->disabled(),
