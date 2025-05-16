@@ -2,6 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Resources;
 
+use CreativeWork\FilamentExact\Enums\QueuePriorityEnum;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
@@ -88,8 +89,9 @@ class ExactQueueResource extends Resource
                             ->options(QueueStatusEnum::class)
                             ->columnSpan(2)
                             ->disabled(),
-                        TextInput::make('priority')
+                        Select::make('priority')
                             ->label(__('Priority'))
+                            ->options(QueuePriorityEnum::class)
                             ->columnSpan(2)
                             ->disabled(),
                         Textarea::make('parameters')
@@ -100,6 +102,14 @@ class ExactQueueResource extends Resource
                         TextArea::make('response')
                             ->label(__('Response'))
                             ->columnSpan(2)
+                            ->disabled(),
+                        TextInput::make('created_at')
+                            ->label(__('Created at'))
+                            ->columnSpan(1)
+                            ->disabled(),
+                        TextInput::make('finished_at')
+                            ->label(__('Finished at'))
+                            ->columnSpan(1)
                             ->disabled(),
                     ])
                     ->columns(2),
@@ -132,6 +142,7 @@ class ExactQueueResource extends Resource
                     ->searchable(),
                 TextColumn::make('priority')
                     ->label(__('Priority'))
+                    ->badge()
                     ->sortable()
                     ->searchable(),
             ])

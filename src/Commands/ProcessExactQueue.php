@@ -57,12 +57,21 @@ class ProcessExactQueue extends Command
             $job->handle($exactService);
 
             // Update queue status
-            $queue->update(['status' => QueueStatusEnum::COMPLETED]);
+            $queue->update([
+                'status' => QueueStatusEnum::COMPLETED,
+                'finished_at' => now(),
+            ]);
+
             $token->unlock();
 
         } catch (\Exception $e) {
             Log::error('Error processing ExactQueue job', ['job' => $queue->id, 'error' => $e->getMessage()]);
-            $queue->update(['status' => QueueStatusEnum::FAILED, 'response' => $e->getMessage()]);
+            $queue->update([
+                'status' => QueueStatusEnum::FAILED,
+                'response' => $e->getMessage(),
+                'finished_at' => now(),
+            ]);
+
             $token->unlock();
 
             $recipients = config('filament-exact.notifications.mail.to');

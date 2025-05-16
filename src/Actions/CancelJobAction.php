@@ -64,6 +64,7 @@ class CancelJobAction
         $record->update([
             'status' => QueueStatusEnum::FAILED,
             'response' => 'Job has been cancelled by ' . auth()->user()->name,
+            'finished_at' => now(),
         ]);
 
         if (! is_null($livewire)) {

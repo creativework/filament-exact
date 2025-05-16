@@ -2,6 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Actions;
 
+use CreativeWork\FilamentExact\Enums\QueuePriorityEnum;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Models\ExactQueue;
 use Filament\Actions\Action;
@@ -61,7 +62,7 @@ class PrioritizeJobAction
 
     public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
     {
-        $record->update(['priority' => 10]);
+        $record->update(['priority' => QueuePriorityEnum::URGENT]);
 
         if (! is_null($livewire)) {
             $livewire->refreshFormData([

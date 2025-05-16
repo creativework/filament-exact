@@ -30,5 +30,12 @@
     "Duplicate Job": "Duplicate Job",
     "Are you sure you want to duplicate this job?": "Are you sure you want to duplicate this job?",
     "Duplicated successfully": "Duplicated successfully",
-    "The job has been duplicated and added to the queue.": "The job has been duplicated and added to the queue."
+    "The job has been duplicated and added to the queue.": "The job has been duplicated and added to the queue.",
+    "Created at": "Created at",
+    "Finished at": "Finished at",
+    "Very low": "Very low",
+    "Low": "Low",
+    "Normal": "Normal",
+    "High": "High",
+    "Urgent": "Urgent"
 }

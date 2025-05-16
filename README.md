@@ -154,15 +154,28 @@ return [
 ```php
 use App\Jobs\ImportProductsJob;
 use CreativeWork\FilamentExact\Models\ExactQueue;
+use CreativeWork\FilamentExact\Enums\QueuePriorityEnum;
 
 ExactQueue::create([
     "job" => ImportProductsJob::class,
     "parameters" => [
         "invoice_id" => $invoice->id,
     ],
-    "priority" => 4, // 1-10 (1 = low, 10 = high)
+    "priority" => QueuePriorityEnum::NORMAL, 
 ]);
 ```
+
+### Available priorities
+The `priority` field in the `ExactQueue` model can be set to one of the following values:
+
+| Enum constant                  | Value | Description          |
+|:-------------------------------|:------|:---------------------|
+| `QueuePriorityEnum::VERY_LOW`  | `0`   | Background tasks     |
+| `QueuePriorityEnum::LOW`       | `1`   | Low-importance tasks |
+| `QueuePriorityEnum::NORMAL`    | `2`   | Default priority     |
+| `QueuePriorityEnum::HIGH`      | `3`   | Time-sensitive       |
+| `QueuePriorityEnum::URGENT`    | `4`   | Immediate execution  |
+
 ### Create a Custom Job
 ```php
 use CreativeWork\FilamentExact\Jobs\ExactQueueJob;

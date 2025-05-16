@@ -29,5 +29,12 @@
     "Duplicate Job": "Taak dupliceren",
     "Are you sure you want to duplicate this job?": "Weet je zeker dat je deze taak wilt dupliceren?",
     "Duplicated successfully": "Successvol gedupliceerd",
-    "The job has been duplicated and added to the queue.": "De taak is gedupliceerd en toegevoegd aan de wachtrij."
+    "The job has been duplicated and added to the queue.": "De taak is gedupliceerd en toegevoegd aan de wachtrij.",
+    "Created at": "Aangemaakt op",
+    "Finished at": "Afgerond op",
+    "Very low": "Zeer laag",
+    "Low": "Laag",
+    "Normal": "Normaal",
+    "High": "Hoog",
+    "Urgent": "Urgent"
 }

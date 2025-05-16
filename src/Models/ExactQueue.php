@@ -2,6 +2,7 @@
 
 namespace CreativeWork\FilamentExact\Models;
 
+use CreativeWork\FilamentExact\Enums\QueuePriorityEnum;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Mail\ExactErrorMail;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,10 +21,12 @@ class ExactQueue extends Model
         'priority',
         'attempts',
         'response',
+        'finished_at',
     ];
 
     protected $casts = [
         'status' => QueueStatusEnum::class,
+        'priority' => QueuePriorityEnum::class,
         'parameters' => 'array',
     ];
 
