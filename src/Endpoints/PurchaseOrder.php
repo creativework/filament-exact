@@ -81,9 +81,6 @@ class PurchaseOrder extends Model
 
     protected $url = 'purchaseorder/PurchaseOrders';
 
-    /**
-     * @param array $array
-     */
     public function addItem(array $array)
     {
         if (! isset($this->attributes['PurchaseOrderLines']) || $this->attributes['PurchaseOrderLines'] == null) {

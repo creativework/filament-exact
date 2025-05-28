@@ -15,6 +15,8 @@ class PrioritizeJobAction
 {
     public static function make($type = 'general'): Action | TableAction | BulkAction
     {
+        $modelClass = config('filament-exact.model');
+
         switch ($type) {
             case 'table':
                 return TableAction::make('prioritize')
@@ -23,7 +25,7 @@ class PrioritizeJobAction
                     ->icon('heroicon-o-exclamation-triangle')
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to increase the priority of this job?'))
-                    ->visible(fn ($record) => $record->status === QueueStatusEnum::PENDING)
+                    ->visible(fn ($record) => $record->status === QueueStatusEnum::PENDING && auth()->user()?->can('prioritize', $record) ?? true)
                     ->action(function (TableAction $action, ExactQueue $record) {
                         return static::handle($action, $record);
                     });
@@ -37,6 +39,7 @@ class PrioritizeJobAction
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to increase the priority of this job?'))
                     ->deselectRecordsAfterCompletion()
+                    ->visible(fn () => auth()->user()?->can('prioritize', new $modelClass) ?? true)
                     ->action(function (BulkAction $action, Collection $records) {
                         foreach ($records as $record) {
                             static::handle($action, $record);
@@ -51,7 +54,7 @@ class PrioritizeJobAction
                     ->icon('heroicon-o-exclamation-triangle')
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to increase the priority of this job?'))
-                    ->visible(fn ($record) => $record->status === QueueStatusEnum::PENDING)
+                    ->visible(fn ($record) => $record->status === QueueStatusEnum::PENDING && auth()->user()?->can('prioritize', $record) ?? true)
                     ->action(function (Action $action, ExactQueue $record, $livewire = null) {
                         return static::handle($action, $record, $livewire);
                     });
@@ -62,6 +65,16 @@ class PrioritizeJobAction
 
     public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
     {
+        if (auth()->user() && ! auth()->user()->can('prioritize', $record)) {
+            Notification::make()
+                ->title(__('Permission Denied'))
+                ->body(__('You do not have permission to prioritize this job.'))
+                ->danger()
+                ->send();
+
+            return;
+        }
+
         $record->update(['priority' => QueuePriorityEnum::URGENT]);
 
         if (! is_null($livewire)) {

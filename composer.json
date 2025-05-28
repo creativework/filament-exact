@@ -1,6 +1,6 @@
 {
     "name": "creativework/filament-exact",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "ExactOnline Panel for FilamentPHP",
     "keywords": [
         "creativework",
@@ -23,10 +23,11 @@
     "require": {
         "php": "^8.1",
         "ext-json": "*",
+        "bezhansalleh/filament-shield": "^3.3",
         "filament/filament": "^3.0",
         "guzzlehttp/guzzle": "^7.9",
         "spatie/laravel-package-tools": "^1.15.0",
-        "spatie/laravel-permission": "^6.16"
+        "spatie/laravel-permission": "^6.18"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -68,12 +69,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": {
-        "packagist.org": false,
-        "private-packagist": {
-            "type": "composer",
-            "url": "https://repo.packagist.com/creativework/"
-        }
-    }
+    "prefer-stable": true
 }

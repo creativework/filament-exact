@@ -49,6 +49,7 @@ class ExactService
     {
         // Refresh tokens if needed
         $this->connection->checkOrAcquireAccessToken();
+
         return $this->connection;
     }
 
@@ -83,12 +84,12 @@ class ExactService
     public function download(string $url): ?StreamInterface
     {
         try {
-            $client = new Client();
+            $client = new Client;
             $res = $client->get($url, [
                 'headers' => [
-                    'Accept'        => 'application/json',
-                    'Content-Type'  => 'application/json',
-                    'Prefer'        => 'return=representation',
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Prefer' => 'return=representation',
                     'Authorization' => 'Bearer ' . $this->connection->getAccessToken(),
                 ],
             ]);
@@ -96,6 +97,7 @@ class ExactService
             return $res->getBody();
         } catch (RequestException $e) {
             Log::warning("Failed to download item image: {$e->getMessage()}");
+
             return null;
         }
     }

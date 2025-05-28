@@ -32,11 +32,13 @@ class ProcessExactQueue extends Command
         $token = ExactToken::firstOrNew([]);
         if ($token->isLocked()) {
             Log::info('ExactQueue is locked, skipping processing', ['queue' => $queue->id]);
+
             return;
         }
 
-        if (!$token->isAuthorized()) {
+        if (! $token->isAuthorized()) {
             Log::info('ExactQueue is not authorized, skipping processing', ['queue' => $queue->id]);
+
             return;
         }
 

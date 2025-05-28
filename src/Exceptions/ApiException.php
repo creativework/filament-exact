@@ -2,6 +2,4 @@
 
 namespace CreativeWork\FilamentExact\Exceptions;
 
-class ApiException extends \Exception
-{
-}
+class ApiException extends \Exception {}

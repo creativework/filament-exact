@@ -8,9 +8,9 @@ use CreativeWork\FilamentExact\Traits\Storable;
 
 class Item extends Model
 {
+    use Downloadable;
     use Findable;
     use Storable;
-    use Downloadable;
 
     protected $fillable = [
         'ID',
