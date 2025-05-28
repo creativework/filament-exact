@@ -64,17 +64,19 @@ class ListExactQueue extends ListRecords
 
     public function getHeaderActions(): array
     {
-        return [
-            Action::make('authorize')
+        $actions = [];
+        $modelClass = config('filament-exact.model');
+
+        // Check authorization permission using policy
+        if (auth()->user()?->can('authorize', new $modelClass) ?? true) {
+            $actions[] = Action::make('authorize')
                 ->icon('heroicon-o-key')
                 ->color(function ($record) {
                     $token = ExactToken::first();
-
                     return $token && $token['access_token'] ? 'danger' : 'success';
                 })
                 ->label(function ($record) {
                     $token = ExactToken::first();
-
                     return $token && $token['access_token'] ? __('Disconnect') : __('Authorize');
                 })
                 ->action(function ($record) {
@@ -93,7 +95,9 @@ class ListExactQueue extends ListRecords
 
                     $service = new ExactService;
                     redirect()->away($service->getAuthUrl());
-                }),
-        ];
+                });
+        }
+
+        return $actions;
     }
 }

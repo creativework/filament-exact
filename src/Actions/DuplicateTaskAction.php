@@ -14,6 +14,8 @@ class DuplicateTaskAction
 {
     public static function make($type = 'general'): Action | TableAction | BulkAction
     {
+        $modelClass = config('filament-exact.model');
+
         switch ($type) {
             case 'table':
                 return TableAction::make('duplicate')
@@ -22,6 +24,7 @@ class DuplicateTaskAction
                     ->icon('heroicon-o-document-duplicate')
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to duplicate this job?'))
+                    ->visible(fn ($record) => auth()->user()?->can('duplicate', $record) ?? true)
                     ->action(function (TableAction $action, ExactQueue $record) {
                         return static::handle($action, $record);
                     });
@@ -35,6 +38,7 @@ class DuplicateTaskAction
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to duplicate this job?'))
                     ->deselectRecordsAfterCompletion()
+                    ->visible(fn () => auth()->user()?->can('duplicate', new $modelClass) ?? true)
                     ->action(function (BulkAction $action, Collection $records) {
                         foreach ($records as $record) {
                             static::handle($action, $record);
@@ -49,6 +53,7 @@ class DuplicateTaskAction
                     ->icon('heroicon-o-document-duplicate')
                     ->requiresConfirmation()
                     ->modalDescription(__('Are you sure you want to duplicate this job?'))
+                    ->visible(fn ($record) => auth()->user()?->can('duplicate', $record) ?? true)
                     ->action(function (Action $action, ExactQueue $record, $livewire = null) {
                         return static::handle($action, $record, $livewire);
                     });
@@ -59,6 +64,14 @@ class DuplicateTaskAction
 
     public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
     {
+        if (auth()->user() && !auth()->user()->can('duplicate', $record)) {
+            Notification::make()
+                ->title(__('Permission Denied'))
+                ->body(__('You do not have permission to duplicate this job.'))
+                ->danger()
+                ->send();
+            return;
+        }
 
         $newRecord = $record->replicate();
         $newRecord->status = QueueStatusEnum::PENDING;

@@ -37,5 +37,9 @@
     "Low": "Low",
     "Normal": "Normal",
     "High": "High",
-    "Urgent": "Urgent"
+    "Urgent": "Urgent",
+    "Permission Denied": "Permission Denied",
+    "You do not have permission to cancel this job.": "You do not have permission to cancel this job.",
+    "You do not have permission to duplicate this job.": "You do not have permission to duplicate this job.",
+    "You do not have permission to prioritize this job.": "You do not have permission to prioritize this job."
 }

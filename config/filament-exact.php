@@ -35,4 +35,16 @@ return [
         'group' => null,
         'sort' => -1,
     ],
+
+    'shield' => [
+        'enabled' => false,
+        'permissions' => [
+            'view_any_exact_queue',
+            'view_exact_queue',
+            'authorize_exact_queue',
+            'duplicate_exact_queue',
+            'cancel_exact_queue',
+            'prioritize_exact_queue',
+        ],
+    ],
 ];

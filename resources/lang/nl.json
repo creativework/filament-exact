@@ -36,5 +36,9 @@
     "Low": "Laag",
     "Normal": "Normaal",
     "High": "Hoog",
-    "Urgent": "Urgent"
+    "Urgent": "Urgent",
+    "Permission Denied": "Toestemming geweigerd",
+    "You do not have permission to cancel this job.": "Je hebt geen rechten om deze taak te annuleren.",
+    "You do not have permission to duplicate this job.": "Je hebt geen rechten om deze taak te dupliceren.",
+    "You do not have permission to prioritize this job.": "Je hebt geen rechten om de prioriteit van deze taak te verhogen."
 }
