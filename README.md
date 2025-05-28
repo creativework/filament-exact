@@ -201,7 +201,15 @@ php artisan shield:setup
 ])
 ```
 
-5. Enable the permissions in the `config/filament-exact.php` configuration file:
+5. Enable `custom_permissions` in the `config/filament-shield.php` configuration file:
+```php
+'entities' => [
+    ...
+    'custom_permissions' => true,
+],
+```
+
+6. Enable the permissions in the `config/filament-exact.php` configuration file:
 ```php
 'shield' => [
     'enabled' => true,
