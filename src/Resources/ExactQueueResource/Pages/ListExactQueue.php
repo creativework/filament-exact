@@ -20,7 +20,7 @@ class ListExactQueue extends ListRecords
 
     public function getTitle(): string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     protected function getActions(): array
@@ -73,10 +73,12 @@ class ListExactQueue extends ListRecords
                 ->icon('heroicon-o-key')
                 ->color(function ($record) {
                     $token = ExactToken::first();
+
                     return $token && $token['access_token'] ? 'danger' : 'success';
                 })
                 ->label(function ($record) {
                     $token = ExactToken::first();
+
                     return $token && $token['access_token'] ? __('Disconnect') : __('Authorize');
                 })
                 ->action(function ($record) {

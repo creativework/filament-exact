@@ -80,7 +80,7 @@ class Model implements \JsonSerializable
     /**
      * Fill the entity from an array.
      *
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      */
     protected function fill(array $attributes)
     {
@@ -94,8 +94,7 @@ class Model implements \JsonSerializable
     /**
      * Get the fillable attributes of an array.
      *
-     * @param array<string, mixed> $attributes
-     *
+     * @param  array<string, mixed>  $attributes
      * @return array<string, mixed>
      */
     protected function fillableFromArray(array $attributes)
@@ -137,7 +136,7 @@ class Model implements \JsonSerializable
 
         try {
             if (array_key_exists($key, $this->attributes) && is_array($this->attributes[$key]) && array_key_exists('__deferred', $this->attributes[$key])) {
-                $class = preg_replace('/(.+?)s?$/', __NAMESPACE__ . '\\\$1', $key); // Filter plural 's' and add namespace
+                $class = preg_replace('/(.+?)s?$/', __NAMESPACE__.'\\\$1', $key); // Filter plural 's' and add namespace
                 $deferred = new $class($this->connection());
                 $uri = $this->attributes[$key]['__deferred']['uri'];
                 $deferred->connection()->nextUrl = $uri; // $uri is complete, by setting it to nextUrl Connection->formatUrl leaves it as is.
@@ -190,8 +189,7 @@ class Model implements \JsonSerializable
     /**
      * Refresh deferred item by clearing and then lazy loading it.
      *
-     * @param mixed $key
-     *
+     * @param  mixed  $key
      * @return mixed
      */
     public function refresh($key)
@@ -263,7 +261,7 @@ class Model implements \JsonSerializable
         $action = preg_match('/^GET|POST|PUT|DELETE$/i', $action) ? strtoupper($action) : 'GET';
         $result = $this->connection()->get('users/UserHasRights', [
             'endpoint' => "'{$this->url}'",
-            'action'   => "'{$action}'",
+            'action' => "'{$action}'",
         ]);
 
         return $result['UserHasRights'] ?? null;

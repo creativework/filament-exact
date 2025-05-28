@@ -9,7 +9,7 @@ trait HasExactQueuePermissions
      */
     public function giveExactQueuePermissions(): void
     {
-        if (!method_exists($this, 'givePermissionTo')) {
+        if (! method_exists($this, 'givePermissionTo')) {
             return;
         }
 
@@ -25,7 +25,7 @@ trait HasExactQueuePermissions
      */
     public function revokeExactQueuePermissions(): void
     {
-        if (!method_exists($this, 'revokePermissionTo')) {
+        if (! method_exists($this, 'revokePermissionTo')) {
             return;
         }
 

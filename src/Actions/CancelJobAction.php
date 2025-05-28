@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CancelJobAction
 {
-    public static function make($type = 'general'): Action | TableAction | BulkAction
+    public static function make($type = 'general'): Action|TableAction|BulkAction
     {
         $modelClass = config('filament-exact.model');
 
@@ -62,20 +62,21 @@ class CancelJobAction
         }
     }
 
-    public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
+    public static function handle(Action|TableAction|BulkAction $action, ExactQueue $record, $livewire = null)
     {
-        if (auth()->user() && !auth()->user()->can('cancel', $record)) {
+        if (auth()->user() && ! auth()->user()->can('cancel', $record)) {
             Notification::make()
                 ->title(__('Permission Denied'))
                 ->body(__('You do not have permission to cancel this job.'))
                 ->danger()
                 ->send();
+
             return;
         }
 
         $record->update([
             'status' => QueueStatusEnum::FAILED,
-            'response' => 'Job has been cancelled by ' . auth()->user()->name,
+            'response' => 'Job has been cancelled by '.auth()->user()->name,
             'finished_at' => now(),
         ]);
 

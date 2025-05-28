@@ -89,9 +89,6 @@ class SalesOrder extends Model
 
     protected $url = 'salesorder/SalesOrders';
 
-    /**
-     * @param array $array
-     */
     public function addItem(array $array)
     {
         if (! isset($this->attributes['SalesOrderLines']) || $this->attributes['SalesOrderLines'] == null) {

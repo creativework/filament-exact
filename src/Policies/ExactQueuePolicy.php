@@ -14,7 +14,7 @@ class ExactQueuePolicy
     public function viewAny($user): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 
@@ -27,7 +27,7 @@ class ExactQueuePolicy
     public function view($user, $exactQueue = null): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 
@@ -40,7 +40,7 @@ class ExactQueuePolicy
     public function authorize($user): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 
@@ -53,7 +53,7 @@ class ExactQueuePolicy
     public function duplicate($user, $exactQueue = null): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 
@@ -66,7 +66,7 @@ class ExactQueuePolicy
     public function cancel($user, $exactQueue = null): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 
@@ -79,7 +79,7 @@ class ExactQueuePolicy
     public function prioritize($user, $exactQueue = null): bool
     {
         // If no permission system, allow everything
-        if (!method_exists($user, 'can')) {
+        if (! method_exists($user, 'can')) {
             return true;
         }
 

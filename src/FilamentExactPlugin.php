@@ -50,6 +50,7 @@ class FilamentExactPlugin implements Plugin
     public function webhooks(array $webhooks): static
     {
         $this->webhooks = $webhooks;
+
         return $this;
     }
 
@@ -75,7 +76,7 @@ class FilamentExactPlugin implements Plugin
      */
     protected function createPermissions(): void
     {
-        if (!class_exists(Permission::class)) {
+        if (! class_exists(Permission::class)) {
             return;
         }
 
@@ -84,7 +85,7 @@ class FilamentExactPlugin implements Plugin
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
                 'name' => $permission,
-                'guard_name' => 'web'
+                'guard_name' => 'web',
             ]);
         }
     }
@@ -112,5 +113,4 @@ class FilamentExactPlugin implements Plugin
     {
         return config('filament-exact.shield.permissions', []);
     }
-
 }

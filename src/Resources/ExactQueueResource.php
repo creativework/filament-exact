@@ -6,11 +6,11 @@ use CreativeWork\FilamentExact\Enums\QueuePriorityEnum;
 use CreativeWork\FilamentExact\Enums\QueueStatusEnum;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ListExactQueue;
 use CreativeWork\FilamentExact\Resources\ExactQueueResource\Pages\ViewExactQueue;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
@@ -42,12 +42,12 @@ class ExactQueueResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getLabel(): ?string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getNavigationIcon(): string
@@ -57,7 +57,7 @@ class ExactQueueResource extends Resource
 
     public function getTitle(): string
     {
-        return __('Exact') . ' ' . __('Queue');
+        return __('Exact').' '.__('Queue');
     }
 
     public static function getModelLabel(): string

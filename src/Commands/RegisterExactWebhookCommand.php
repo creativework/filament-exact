@@ -50,7 +50,7 @@ class RegisterExactWebhookCommand extends Command
                 $recipients = config('filament-exact.notifications.mail.to');
                 if ($recipients) {
                     foreach ($recipients as $recipient) {
-                        Mail::to($recipient)->send(new ExactErrorMail('Error registering Exact Online webhook: ' . $webhook->topic, $e->getMessage()));
+                        Mail::to($recipient)->send(new ExactErrorMail('Error registering Exact Online webhook: '.$webhook->topic, $e->getMessage()));
                     }
                 }
             }

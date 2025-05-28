@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DuplicateTaskAction
 {
-    public static function make($type = 'general'): Action | TableAction | BulkAction
+    public static function make($type = 'general'): Action|TableAction|BulkAction
     {
         $modelClass = config('filament-exact.model');
 
@@ -62,14 +62,15 @@ class DuplicateTaskAction
         }
     }
 
-    public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
+    public static function handle(Action|TableAction|BulkAction $action, ExactQueue $record, $livewire = null)
     {
-        if (auth()->user() && !auth()->user()->can('duplicate', $record)) {
+        if (auth()->user() && ! auth()->user()->can('duplicate', $record)) {
             Notification::make()
                 ->title(__('Permission Denied'))
                 ->body(__('You do not have permission to duplicate this job.'))
                 ->danger()
                 ->send();
+
             return;
         }
 

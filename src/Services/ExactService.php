@@ -41,7 +41,7 @@ class ExactService
         try {
             $this->connection->checkOrAcquireAccessToken();
         } catch (\Exception $e) {
-            throw new \Exception('Could not authorize Exact: ' . $e->getMessage());
+            throw new \Exception('Could not authorize Exact: '.$e->getMessage());
         }
     }
 
@@ -49,6 +49,7 @@ class ExactService
     {
         // Refresh tokens if needed
         $this->connection->checkOrAcquireAccessToken();
+
         return $this->connection;
     }
 
@@ -83,19 +84,20 @@ class ExactService
     public function download(string $url): ?StreamInterface
     {
         try {
-            $client = new Client();
+            $client = new Client;
             $res = $client->get($url, [
                 'headers' => [
-                    'Accept'        => 'application/json',
-                    'Content-Type'  => 'application/json',
-                    'Prefer'        => 'return=representation',
-                    'Authorization' => 'Bearer ' . $this->connection->getAccessToken(),
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Prefer' => 'return=representation',
+                    'Authorization' => 'Bearer '.$this->connection->getAccessToken(),
                 ],
             ]);
 
             return $res->getBody();
         } catch (RequestException $e) {
             Log::warning("Failed to download item image: {$e->getMessage()}");
+
             return null;
         }
     }
