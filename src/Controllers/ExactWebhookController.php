@@ -68,7 +68,7 @@ class ExactWebhookController extends Controller
                 }
             }
 
-            return response()->json(['error' => 'Error: '.$e->getMessage()], 500);
+            return response()->json(['error' => 'Error: ' . $e->getMessage()], 500);
         }
     }
 }

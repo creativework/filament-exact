@@ -178,7 +178,7 @@ class Connection
         // If we have a token, sign the request
         $accessToken = $this->getAccessToken();
         if (! $this->needsAuthentication() && ! empty($accessToken)) {
-            $headers['Authorization'] = 'Bearer '.$accessToken;
+            $headers['Authorization'] = 'Bearer ' . $accessToken;
         }
 
         // Create param string
@@ -244,7 +244,7 @@ class Connection
      */
     public function upload($topic, $body, $params = [])
     {
-        $url = $this->getBaseUrl().'/docs/XMLUpload.aspx?Topic='.$topic.'&_Division_='.$this->getDivision();
+        $url = $this->getBaseUrl() . '/docs/XMLUpload.aspx?Topic=' . $topic . '&_Division_=' . $this->getDivision();
 
         try {
             $request = $this->createRequest('POST', $url, $body, $params);
@@ -265,7 +265,7 @@ class Connection
      */
     public function download($topic, $params = [])
     {
-        $url = $this->getBaseUrl().'/docs/XMLDownload.aspx?Topic='.$topic.'&_Division_='.$this->getDivision();
+        $url = $this->getBaseUrl() . '/docs/XMLDownload.aspx?Topic=' . $topic . '&_Division_=' . $this->getDivision();
 
         try {
             $request = $this->createRequest('GET', $url, null, $params);
@@ -322,7 +322,7 @@ class Connection
 
     public function getAuthUrl(): string
     {
-        return $this->baseUrl.$this->authUrl.'?'.http_build_query([
+        return $this->baseUrl . $this->authUrl . '?' . http_build_query([
             'client_id' => $this->exactClientId,
             'redirect_uri' => $this->redirectUrl,
             'response_type' => 'code',
@@ -380,7 +380,7 @@ class Connection
     public function redirectForAuthorization(): void
     {
         $authUrl = $this->getAuthUrl();
-        header('Location: '.$authUrl);
+        header('Location: ' . $authUrl);
         exit;
     }
 
@@ -435,7 +435,7 @@ class Connection
             $responseBody = $response->getBody()->getContents();
             $json = json_decode($responseBody, true);
             if (is_array($json) === false) {
-                throw new ApiException('Json decode failed. Got response: '.$responseBody);
+                throw new ApiException('Json decode failed. Got response: ' . $responseBody);
             }
             if (array_key_exists('d', $json)) {
                 if (array_key_exists('__next', $json['d'])) {
@@ -618,7 +618,7 @@ class Connection
                     call_user_func($this->tokenUpdateCallback, $this);
                 }
             } else {
-                throw new ApiException('Could not acquire tokens, json decode failed. Got response: '.$responseBody);
+                throw new ApiException('Could not acquire tokens, json decode failed. Got response: ' . $responseBody);
             }
         } catch (BadResponseException $ex) {
             $this->parseExceptionForErrorMessages($ex);
@@ -771,7 +771,7 @@ class Connection
             $errorMessage .= " (Reason: {$reason})";
         }
 
-        throw new ApiException('Error '.$response->getStatusCode().': '.$errorMessage, $response->getStatusCode(), $e);
+        throw new ApiException('Error ' . $response->getStatusCode() . ': ' . $errorMessage, $response->getStatusCode(), $e);
     }
 
     /**
@@ -829,12 +829,12 @@ class Connection
 
     private function getApiUrl(): string
     {
-        return $this->baseUrl.$this->apiUrl;
+        return $this->baseUrl . $this->apiUrl;
     }
 
     private function getTokenUrl(): string
     {
-        return $this->baseUrl.$this->tokenUrl;
+        return $this->baseUrl . $this->tokenUrl;
     }
 
     /**

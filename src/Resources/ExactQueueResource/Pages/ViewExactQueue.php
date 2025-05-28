@@ -17,7 +17,7 @@ class ViewExactQueue extends ViewRecord
 
     public function getTitle(): string
     {
-        return __('Job').' #'.$this->record->id;
+        return __('Job') . ' #' . $this->record->id;
     }
 
     public function getHeaderActions(): array

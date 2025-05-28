@@ -137,7 +137,7 @@ class FilamentExactServiceProvider extends PackageServiceProvider
      */
     protected function getMigrations(): array
     {
-        return collect(app(Filesystem::class)->files(__DIR__.'/../database/migrations'))
+        return collect(app(Filesystem::class)->files(__DIR__ . '/../database/migrations'))
             ->map(fn (SplFileInfo $file) => str_replace('.php.stub', '', $file->getBasename()))
             ->toArray();
     }

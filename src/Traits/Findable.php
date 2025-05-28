@@ -20,10 +20,10 @@ trait Findable
 
     public function find($id)
     {
-        $filter = $this->primaryKey()." eq guid'$id'";
+        $filter = $this->primaryKey() . " eq guid'$id'";
 
         if ($this->primaryKey() === 'Code') {
-            $filter = $this->primaryKey()." eq $id";
+            $filter = $this->primaryKey() . " eq $id";
         }
 
         $records = $this->connection()->get($this->url(), [
@@ -40,7 +40,7 @@ trait Findable
     {
         // eg: $oAccounts->findWithSelect('5b7f4515-b7a0-4839-ac69-574968677d96', 'Code, Name');
         $result = $this->connection()->get($this->url(), [
-            '$filter' => $this->primaryKey()." eq guid'$id'",
+            '$filter' => $this->primaryKey() . " eq guid'$id'",
             '$select' => $select,
         ]);
 

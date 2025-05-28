@@ -136,7 +136,7 @@ class Model implements \JsonSerializable
 
         try {
             if (array_key_exists($key, $this->attributes) && is_array($this->attributes[$key]) && array_key_exists('__deferred', $this->attributes[$key])) {
-                $class = preg_replace('/(.+?)s?$/', __NAMESPACE__.'\\\$1', $key); // Filter plural 's' and add namespace
+                $class = preg_replace('/(.+?)s?$/', __NAMESPACE__ . '\\\$1', $key); // Filter plural 's' and add namespace
                 $deferred = new $class($this->connection());
                 $uri = $this->attributes[$key]['__deferred']['uri'];
                 $deferred->connection()->nextUrl = $uri; // $uri is complete, by setting it to nextUrl Connection->formatUrl leaves it as is.

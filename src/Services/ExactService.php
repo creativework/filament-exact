@@ -41,7 +41,7 @@ class ExactService
         try {
             $this->connection->checkOrAcquireAccessToken();
         } catch (\Exception $e) {
-            throw new \Exception('Could not authorize Exact: '.$e->getMessage());
+            throw new \Exception('Could not authorize Exact: ' . $e->getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ class ExactService
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                     'Prefer' => 'return=representation',
-                    'Authorization' => 'Bearer '.$this->connection->getAccessToken(),
+                    'Authorization' => 'Bearer ' . $this->connection->getAccessToken(),
                 ],
             ]);
 

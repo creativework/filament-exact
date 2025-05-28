@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PrioritizeJobAction
 {
-    public static function make($type = 'general'): Action|TableAction|BulkAction
+    public static function make($type = 'general'): Action | TableAction | BulkAction
     {
         $modelClass = config('filament-exact.model');
 
@@ -63,7 +63,7 @@ class PrioritizeJobAction
         }
     }
 
-    public static function handle(Action|TableAction|BulkAction $action, ExactQueue $record, $livewire = null)
+    public static function handle(Action | TableAction | BulkAction $action, ExactQueue $record, $livewire = null)
     {
         if (auth()->user() && ! auth()->user()->can('prioritize', $record)) {
             Notification::make()

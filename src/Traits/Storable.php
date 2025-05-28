@@ -60,7 +60,7 @@ trait Storable
     {
         $primaryKey = $this->primaryKeyContent();
 
-        return $this->connection()->put($this->url()."(guid'$primaryKey')", $this->json());
+        return $this->connection()->put($this->url() . "(guid'$primaryKey')", $this->json());
     }
 
     /**
@@ -72,6 +72,6 @@ trait Storable
     {
         $primaryKey = $this->primaryKeyContent();
 
-        return $this->connection()->delete($this->url()."(guid'$primaryKey')");
+        return $this->connection()->delete($this->url() . "(guid'$primaryKey')");
     }
 }
